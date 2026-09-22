@@ -14,10 +14,19 @@
     "paralympic_closing": "2024-09-08",
     "disclaimer": "Portfolio demo — fictional data, not real operator agreements or live configs",
     "endorsement": "Personal portfolio demo inspired by program work at Bouygues Telecom. Not an official Bouygues Telecom publication or endorsement.",
-    "plmn_note": "MCC 001 is the ITU-T test MCC. Every PLMN below is an example code, not a live network.",
-    "kpi_definition": "An agreement is completed when its status is signed or live.",
-    "completed_agreement_statuses": ["signed", "live"],
-    "region_order": ["Europe", "Americas", "Asia-Pacific", "Middle East", "Africa"]
+    "kpi_definition": "An agreement is completed when its status is signed or live. Percentages use direction lines: a partner marked both is counted inbound and outbound.",
+    "completed_agreement_statuses": [
+      "signed",
+      "live"
+    ],
+    "region_order": [
+      "Europe",
+      "Americas",
+      "Asia-Pacific"
+    ],
+    "partner_count": 21,
+    "tadig_note": "TADIG codes are the public operator codes from the Olympics roaming partner set. Checklist letters are a readiness sketch derived from agreement, IR.21, and tracks, not a live node extract.",
+    "examples_note": "IR.25 tables and SIGOS cards are illustrative examples derived from IR.25 S8HR structure and SIGOS-style test scripts (IMS register, emergency 112, MO/MT, SMS), not live exports."
   },
   "node_legend": {
     "D": "done",
@@ -26,21 +35,51 @@
     "N": "not_started"
   },
   "checklist": [
-    {"id": "ir21", "short": "IR.21", "name": "IR.21 exchange"},
-    {"id": "steering", "short": "Steering", "name": "Steering of roaming"},
-    {"id": "apn", "short": "APN", "name": "APN profile"},
-    {"id": "hss_udm", "short": "HSS/UDM", "name": "HSS / UDM"},
-    {"id": "dra", "short": "DRA", "name": "DRA / STP"},
-    {"id": "pgw_smf", "short": "PGW/SMF", "name": "PGW / SMF + UPF"},
-    {"id": "firewall", "short": "Firewall", "name": "Firewall / ACL"},
-    {"id": "ims_cscf", "short": "IMS", "name": "IMS / CSCF (VoLTE track)"},
-    {"id": "sigos", "short": "SIGOS", "name": "SIGOS test campaign"}
-  ],
-  "technologies": [
-    {"id": "3g", "label": "3G"},
-    {"id": "lte", "label": "LTE"},
-    {"id": "volte", "label": "VoLTE"},
-    {"id": "ims", "label": "IMS"}
+    {
+      "id": "ir21",
+      "short": "IR.21",
+      "name": "IR.21 exchange"
+    },
+    {
+      "id": "steering",
+      "short": "Steering",
+      "name": "Steering of roaming"
+    },
+    {
+      "id": "apn",
+      "short": "APN",
+      "name": "APN profile"
+    },
+    {
+      "id": "hss_udm",
+      "short": "HSS/UDM",
+      "name": "HSS / UDM"
+    },
+    {
+      "id": "dra",
+      "short": "DRA",
+      "name": "DRA / STP"
+    },
+    {
+      "id": "pgw_smf",
+      "short": "PGW/SMF",
+      "name": "PGW / SMF + UPF"
+    },
+    {
+      "id": "firewall",
+      "short": "Firewall",
+      "name": "Firewall / ACL"
+    },
+    {
+      "id": "ims_cscf",
+      "short": "IMS",
+      "name": "IMS / CSCF (VoLTE track)"
+    },
+    {
+      "id": "sigos",
+      "short": "SIGOS",
+      "name": "SIGOS test campaign"
+    }
   ],
   "tools": [
     {
@@ -53,7 +92,7 @@
       "id": "sigos",
       "name": "SIGOS",
       "role": "Active testing",
-      "summary": "Active test platform (SITE / GlobalRoamer family) used for probe-based roaming tests in both directions. Campaigns on this program cover 3G, LTE, VoLTE, and IMS. Pass rates and campaign IDs here are fictional."
+      "summary": "Active test platform (SITE / GlobalRoamer family) used for probe-based roaming tests. The SIGOS cards on this page are illustrative script examples (IMS register, emergency 112, MO/MT voice, SMS), not a live export and not a screenshot of a production UI."
     }
   ],
   "milestones": [
@@ -131,567 +170,725 @@
     }
   ],
   "progress": [
-    {"month": "2023-03", "inbound": 0, "outbound": 0},
-    {"month": "2023-04", "inbound": 6.25, "outbound": 0},
-    {"month": "2023-05", "inbound": 6.25, "outbound": 6.25},
-    {"month": "2023-06", "inbound": 12.5, "outbound": 6.25},
-    {"month": "2023-07", "inbound": 18.75, "outbound": 12.5},
-    {"month": "2023-08", "inbound": 25, "outbound": 18.75},
-    {"month": "2023-09", "inbound": 31.25, "outbound": 25},
-    {"month": "2023-10", "inbound": 43.75, "outbound": 31.25},
-    {"month": "2023-11", "inbound": 50, "outbound": 37.5},
-    {"month": "2023-12", "inbound": 56.25, "outbound": 43.75},
-    {"month": "2024-01", "inbound": 62.5, "outbound": 50},
-    {"month": "2024-02", "inbound": 68.75, "outbound": 56.25},
-    {"month": "2024-03", "inbound": 75, "outbound": 56.25},
-    {"month": "2024-04", "inbound": 75, "outbound": 62.5},
-    {"month": "2024-05", "inbound": 81.25, "outbound": 68.75},
-    {"month": "2024-06", "inbound": 81.25, "outbound": 68.75}
+    {
+      "month": "2023-03",
+      "inbound": 0.0,
+      "outbound": 0.0
+    },
+    {
+      "month": "2023-04",
+      "inbound": 2.12,
+      "outbound": 2.26
+    },
+    {
+      "month": "2023-05",
+      "inbound": 5.61,
+      "outbound": 5.96
+    },
+    {
+      "month": "2023-06",
+      "inbound": 9.89,
+      "outbound": 10.51
+    },
+    {
+      "month": "2023-07",
+      "inbound": 14.79,
+      "outbound": 15.72
+    },
+    {
+      "month": "2023-08",
+      "inbound": 20.22,
+      "outbound": 21.48
+    },
+    {
+      "month": "2023-09",
+      "inbound": 26.1,
+      "outbound": 27.73
+    },
+    {
+      "month": "2023-10",
+      "inbound": 32.38,
+      "outbound": 34.4
+    },
+    {
+      "month": "2023-11",
+      "inbound": 39.04,
+      "outbound": 41.48
+    },
+    {
+      "month": "2023-12",
+      "inbound": 46.04,
+      "outbound": 48.91
+    },
+    {
+      "month": "2024-01",
+      "inbound": 53.35,
+      "outbound": 56.69
+    },
+    {
+      "month": "2024-02",
+      "inbound": 60.97,
+      "outbound": 64.78
+    },
+    {
+      "month": "2024-03",
+      "inbound": 68.87,
+      "outbound": 73.17
+    },
+    {
+      "month": "2024-04",
+      "inbound": 77.03,
+      "outbound": 81.85
+    },
+    {
+      "month": "2024-05",
+      "inbound": 85.45,
+      "outbound": 90.79
+    },
+    {
+      "month": "2024-06",
+      "inbound": 94.12,
+      "outbound": 100.0
+    }
   ],
   "partners": [
     {
-      "id": "Partner-EU-01",
-      "demo": true,
+      "id": "gbr-3uk",
+      "name": "3 UK (Hutchison)",
+      "country": "United Kingdom",
       "region": "Europe",
-      "example_plmn": "001-01",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 99.1},
-          "lte": {"result": "pass", "pass_rate": 98.4},
-          "volte": {"result": "pass", "pass_rate": 96.2},
-          "ims": {"result": "pass", "pass_rate": 94.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-06", "campaign": "DEMO-SIGOS-IN-24061"},
-        "nodes": "DDDDDDDDD"
-      },
-      "outbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.2},
-          "lte": {"result": "pass", "pass_rate": 96.9},
-          "volte": {"result": "pass", "pass_rate": 94.1},
-          "ims": {"result": "pass", "pass_rate": 91.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-04", "campaign": "DEMO-SIGOS-OUT-24059"},
-        "nodes": "DDDDDDDDD"
-      }
+      "tadig": "GBRHU",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-EU-02",
-      "demo": true,
+      "id": "aut-tmobile",
+      "name": "T-Mobile Austria",
+      "country": "Austria",
       "region": "Europe",
-      "example_plmn": "001-02",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.0},
-          "lte": {"result": "pass", "pass_rate": 96.5},
-          "volte": {"result": "pass", "pass_rate": 92.4},
-          "ims": {"result": "partial", "pass_rate": 88.1}
-        },
-        "sigos": {"result": "partial", "date": "2024-06-03", "campaign": "DEMO-SIGOS-IN-24058"},
-        "nodes": "DDDDDDDPP"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 96.4},
-          "lte": {"result": "pass", "pass_rate": 94.0},
-          "volte": {"result": "partial", "pass_rate": 88.7},
-          "ims": {"result": "partial", "pass_rate": 77.0}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-29", "campaign": "DEMO-SIGOS-OUT-24050"},
-        "nodes": "DDDDDDDPP"
-      }
+      "tadig": "AUTMM",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-EU-03",
-      "demo": true,
+      "id": "bel-tb",
+      "name": "Belgium BELTB",
+      "country": "Belgium",
       "region": "Europe",
-      "example_plmn": "001-03",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 97.6},
-          "lte": {"result": "pass", "pass_rate": 95.2},
-          "volte": {"result": "pass", "pass_rate": 90.1},
-          "ims": {"result": "partial", "pass_rate": 79.4}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-28", "campaign": "DEMO-SIGOS-IN-24049"},
-        "nodes": "DDDDDDDPD"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "received",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 95.8},
-          "lte": {"result": "pass", "pass_rate": 92.1},
-          "volte": {"result": "partial", "pass_rate": 80.4},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-21", "campaign": "DEMO-SIGOS-OUT-24042"},
-        "nodes": "PDDPDPPPN"
-      }
+      "tadig": "BELTB",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-EU-04",
-      "demo": true,
+      "id": "bel-ko-tn",
+      "name": "Belgium BELKO / BELTN",
+      "country": "Belgium",
       "region": "Europe",
-      "example_plmn": "001-04",
-      "inbound": {
-        "agreement_status": "negotiation",
-        "agreement_pct": 58,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 91.0},
-          "lte": {"result": "partial", "pass_rate": 84.2},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-16", "campaign": "DEMO-SIGOS-IN-24037"},
-        "nodes": "PPNPBPNNP"
-      },
-      "outbound": {
-        "agreement_status": "negotiation",
-        "agreement_pct": 42,
-        "ir21_status": "requested",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "not_run", "pass_rate": null},
-          "lte": {"result": "not_run", "pass_rate": null},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "not_run", "date": null, "campaign": null},
-        "nodes": "PNNNNNNNN"
-      }
+      "tadig": "BELKO",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "in_progress",
+      "agreement_status": "signed",
+      "agreement_pct": 100,
+      "nodes": "PPPPPPPPP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-EU-05",
-      "demo": true,
-      "region": "Europe",
-      "example_plmn": "001-05",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 99.4},
-          "lte": {"result": "pass", "pass_rate": 97.8},
-          "volte": {"result": "pass", "pass_rate": 95.0},
-          "ims": {"result": "pass", "pass_rate": 91.6}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-08", "campaign": "DEMO-SIGOS-IN-24064"},
-        "nodes": "DDDDDDDDD"
-      },
-      "outbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.7},
-          "lte": {"result": "pass", "pass_rate": 97.0},
-          "volte": {"result": "pass", "pass_rate": 93.5},
-          "ims": {"result": "partial", "pass_rate": 80.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-06", "campaign": "DEMO-SIGOS-OUT-24062"},
-        "nodes": "DDDDDDDPD"
-      }
-    },
-    {
-      "id": "Partner-EU-06",
-      "demo": true,
-      "region": "Europe",
-      "example_plmn": "001-06",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 96.2},
-          "lte": {"result": "pass", "pass_rate": 93.5},
-          "volte": {"result": "partial", "pass_rate": 85.0},
-          "ims": {"result": "partial", "pass_rate": 76.4}
-        },
-        "sigos": {"result": "partial", "date": "2024-06-01", "campaign": "DEMO-SIGOS-IN-24055"},
-        "nodes": "DDDDPDDPP"
-      },
-      "outbound": {
-        "agreement_status": "legal_review",
-        "agreement_pct": 61,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "partial", "pass_rate": 88.0},
-          "lte": {"result": "partial", "pass_rate": 79.5},
-          "volte": {"result": "fail", "pass_rate": 61.0},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "fail", "date": "2024-05-14", "campaign": "DEMO-SIGOS-OUT-24036"},
-        "nodes": "PPPPNNBNP"
-      }
-    },
-    {
-      "id": "Partner-AM-01",
-      "demo": true,
+      "id": "can-bell",
+      "name": "Bell Canada",
+      "country": "Canada",
       "region": "Americas",
-      "example_plmn": "001-07",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.8},
-          "lte": {"result": "pass", "pass_rate": 97.1},
-          "volte": {"result": "pass", "pass_rate": 93.3},
-          "ims": {"result": "pass", "pass_rate": 90.2}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-05", "campaign": "DEMO-SIGOS-IN-24060"},
-        "nodes": "DDDDDDDDD"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 97.5},
-          "lte": {"result": "pass", "pass_rate": 95.6},
-          "volte": {"result": "pass", "pass_rate": 91.8},
-          "ims": {"result": "partial", "pass_rate": 78.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-01", "campaign": "DEMO-SIGOS-OUT-24054"},
-        "nodes": "DDDDDDDPD"
-      }
+      "tadig": "CANBM",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AM-02",
+      "id": "chn-cmcc",
+      "name": "China Mobile",
+      "country": "China",
+      "region": "Asia-Pacific",
+      "tadig": "CHNCT",
       "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "LTE",
+        "3G"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDNN",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "hrv-ht",
+      "name": "Hrvatski Telekom",
+      "country": "Croatia",
+      "region": "Europe",
+      "tadig": "HRVCN",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "dnk-tdc",
+      "name": "Denmark DNKTD",
+      "country": "Denmark",
+      "region": "Europe",
+      "tadig": "DNKTD",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "jpn-kddi",
+      "name": "KDDI",
+      "country": "Japan",
+      "region": "Asia-Pacific",
+      "tadig": "JPNKD",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "LTE",
+        "VoLTE"
+      ],
+      "ir21_status": "in_progress",
+      "agreement_status": "signed",
+      "agreement_pct": 100,
+      "nodes": "PPPPPPPPP",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "kor-lg-out",
+      "name": "LG U+ (outbound VoLTE IR.25)",
+      "country": "South Korea",
+      "region": "Asia-Pacific",
+      "tadig": "KORLG",
+      "demo": true,
+      "directions": [
+        "outbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-OUT",
+        "IR25"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDD",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "kor-lg-toll",
+      "name": "LG U+ (outbound toll)",
+      "country": "South Korea",
+      "region": "Asia-Pacific",
+      "tadig": "KORLG",
+      "demo": true,
+      "directions": [
+        "outbound"
+      ],
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDNN",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "lux-pt",
+      "name": "Luxembourg LUXPT",
+      "country": "Luxembourg",
+      "region": "Europe",
+      "tadig": "LUXPT",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "lux-tg",
+      "name": "Luxembourg LUXTG",
+      "country": "Luxembourg",
+      "region": "Europe",
+      "tadig": "LUXTG",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "R-IN"
+      ],
+      "ir21_status": "in_progress",
+      "agreement_status": "signed",
+      "agreement_pct": 100,
+      "nodes": "PPPPPPPNN",
+      "checklist_note": "derived"
+    },
+    {
+      "id": "mex-mextel",
+      "name": "Mextel Mexico",
+      "country": "Mexico",
       "region": "Americas",
-      "example_plmn": "001-08",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 97.2},
-          "lte": {"result": "pass", "pass_rate": 94.6},
-          "volte": {"result": "partial", "pass_rate": 89.0},
-          "ims": {"result": "partial", "pass_rate": 82.5}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-30", "campaign": "DEMO-SIGOS-IN-24051"},
-        "nodes": "DDDDDDPPD"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "received",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 94.8},
-          "lte": {"result": "pass", "pass_rate": 91.3},
-          "volte": {"result": "partial", "pass_rate": 76.2},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-24", "campaign": "DEMO-SIGOS-OUT-24046"},
-        "nodes": "PDDDPDPPN"
-      }
+      "tadig": "MEXMT",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "pending",
+      "agreement_status": "negotiation",
+      "agreement_pct": 40,
+      "nodes": "NPPNNNNNN",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AM-03",
-      "demo": true,
-      "region": "Americas",
-      "example_plmn": "001-09",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 95.4},
-          "lte": {"result": "pass", "pass_rate": 92.8},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "pass", "date": "2024-05-22", "campaign": "DEMO-SIGOS-IN-24044"},
-        "nodes": "DDDDDDDND"
-      },
-      "outbound": {
-        "agreement_status": "negotiation",
-        "agreement_pct": 46,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "partial", "pass_rate": 86.4},
-          "lte": {"result": "not_run", "pass_rate": null},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-11", "campaign": "DEMO-SIGOS-OUT-24034"},
-        "nodes": "PPNPNNNNP"
-      }
-    },
-    {
-      "id": "Partner-AP-01",
-      "demo": true,
+      "id": "jpn-docomo-in",
+      "name": "NTT DOCOMO (inbound VoLTE)",
+      "country": "Japan",
       "region": "Asia-Pacific",
-      "example_plmn": "001-10",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 99.0},
-          "lte": {"result": "pass", "pass_rate": 98.2},
-          "volte": {"result": "pass", "pass_rate": 94.7},
-          "ims": {"result": "pass", "pass_rate": 92.8}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-09", "campaign": "DEMO-SIGOS-IN-24066"},
-        "nodes": "DDDDDDDDD"
-      },
-      "outbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.1},
-          "lte": {"result": "pass", "pass_rate": 96.4},
-          "volte": {"result": "pass", "pass_rate": 92.7},
-          "ims": {"result": "partial", "pass_rate": 81.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-08", "campaign": "DEMO-SIGOS-OUT-24065"},
-        "nodes": "DDDDDDDPD"
-      }
+      "tadig": "JPNDO",
+      "demo": true,
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN",
+        "IR25"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDD",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AP-02",
-      "demo": true,
+      "id": "jpn-docomo-out",
+      "name": "NTT DOCOMO (outbound toll)",
+      "country": "Japan",
       "region": "Asia-Pacific",
-      "example_plmn": "001-11",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 97.9},
-          "lte": {"result": "pass", "pass_rate": 96.0},
-          "volte": {"result": "pass", "pass_rate": 91.2},
-          "ims": {"result": "partial", "pass_rate": 87.6}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-02", "campaign": "DEMO-SIGOS-IN-24056"},
-        "nodes": "DDDDDDDPD"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 96.0},
-          "lte": {"result": "pass", "pass_rate": 93.8},
-          "volte": {"result": "partial", "pass_rate": 87.5},
-          "ims": {"result": "fail", "pass_rate": 71.0}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-31", "campaign": "DEMO-SIGOS-OUT-24052"},
-        "nodes": "DDDDDDDPP"
-      }
+      "tadig": "JPNDO",
+      "demo": true,
+      "directions": [
+        "outbound"
+      ],
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDNN",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AP-03",
+      "id": "pol-02",
+      "name": "Poland POL02",
+      "country": "Poland",
+      "region": "Europe",
+      "tadig": "POL02",
       "demo": true,
-      "region": "Asia-Pacific",
-      "example_plmn": "001-12",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 94.1},
-          "lte": {"result": "pass", "pass_rate": 90.4},
-          "volte": {"result": "partial", "pass_rate": 78.8},
-          "ims": {"result": "fail", "pass_rate": 68.0}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-20", "campaign": "DEMO-SIGOS-IN-24041"},
-        "nodes": "DDDPPDPPP"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 90.2},
-          "lte": {"result": "partial", "pass_rate": 84.6},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-17", "campaign": "DEMO-SIGOS-OUT-24038"},
-        "nodes": "PDDDPDPNP"
-      }
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AP-04",
+      "id": "che-swisscom-in",
+      "name": "Swisscom (inbound VoLTE)",
+      "country": "Switzerland",
+      "region": "Europe",
+      "tadig": "CHE01",
       "demo": true,
-      "region": "Asia-Pacific",
-      "example_plmn": "001-13",
-      "inbound": {
-        "agreement_status": "legal_review",
-        "agreement_pct": 68,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "not_run", "pass_rate": null},
-          "lte": {"result": "not_run", "pass_rate": null},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "not_run", "date": null, "campaign": null},
-        "nodes": "PPPNNNNNN"
-      },
-      "outbound": {
-        "agreement_status": "not_started",
-        "agreement_pct": 10,
-        "ir21_status": "not_requested",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "not_run", "pass_rate": null},
-          "lte": {"result": "not_run", "pass_rate": null},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "not_run", "date": null, "campaign": null},
-        "nodes": "NNNNNNNNN"
-      }
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-ME-01",
+      "id": "che-swisscom-out",
+      "name": "Swisscom (outbound toll)",
+      "country": "Switzerland",
+      "region": "Europe",
+      "tadig": "CHE01",
       "demo": true,
-      "region": "Middle East",
-      "example_plmn": "001-14",
-      "inbound": {
-        "agreement_status": "live",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 98.5},
-          "lte": {"result": "pass", "pass_rate": 96.7},
-          "volte": {"result": "pass", "pass_rate": 93.8},
-          "ims": {"result": "pass", "pass_rate": 90.9}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-07", "campaign": "DEMO-SIGOS-IN-24063"},
-        "nodes": "DDDDDDDDD"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "validated",
-        "volte_roaming": true,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 97.0},
-          "lte": {"result": "pass", "pass_rate": 94.4},
-          "volte": {"result": "pass", "pass_rate": 90.6},
-          "ims": {"result": "partial", "pass_rate": 81.0}
-        },
-        "sigos": {"result": "pass", "date": "2024-06-03", "campaign": "DEMO-SIGOS-OUT-24057"},
-        "nodes": "DDDDDDDPD"
-      }
+      "directions": [
+        "outbound"
+      ],
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDNN",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AF-01",
+      "id": "esp-telefonica",
+      "name": "Telefónica",
+      "country": "Spain",
+      "region": "Europe",
+      "tadig": "ESPTE",
       "demo": true,
-      "region": "Africa",
-      "example_plmn": "001-15",
-      "inbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 93.6},
-          "lte": {"result": "partial", "pass_rate": 89.2},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-18", "campaign": "DEMO-SIGOS-IN-24039"},
-        "nodes": "PDDDDDPNP"
-      },
-      "outbound": {
-        "agreement_status": "signed",
-        "agreement_pct": 100,
-        "ir21_status": "received",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "pass", "pass_rate": 91.5},
-          "lte": {"result": "partial", "pass_rate": 85.7},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
-        },
-        "sigos": {"result": "partial", "date": "2024-05-19", "campaign": "DEMO-SIGOS-OUT-24040"},
-        "nodes": "PDDDPDPNP"
-      }
+      "directions": [
+        "inbound",
+        "outbound"
+      ],
+      "tracks": [
+        "LTE",
+        "VoLTE"
+      ],
+      "ir21_status": "in_progress",
+      "agreement_status": "signed",
+      "agreement_pct": 100,
+      "nodes": "PPPPPPPPP",
+      "checklist_note": "derived"
     },
     {
-      "id": "Partner-AF-02",
+      "id": "deu-telekom",
+      "name": "Telekom Germany",
+      "country": "Germany",
+      "region": "Europe",
+      "tadig": "DEUD1",
       "demo": true,
-      "region": "Africa",
-      "example_plmn": "001-16",
-      "inbound": {
-        "agreement_status": "negotiation",
-        "agreement_pct": 36,
-        "ir21_status": "requested",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "fail", "pass_rate": 74.0},
-          "lte": {"result": "fail", "pass_rate": 66.5},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
+      "directions": [
+        "inbound"
+      ],
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21_status": "validated",
+      "agreement_status": "live",
+      "agreement_pct": 100,
+      "nodes": "DDDDDDDDP",
+      "checklist_note": "derived"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "3G",
+      "label": "3G"
+    },
+    {
+      "id": "LTE",
+      "label": "LTE"
+    },
+    {
+      "id": "VoLTE",
+      "label": "VoLTE"
+    },
+    {
+      "id": "R-IN",
+      "label": "R-IN"
+    },
+    {
+      "id": "R-OUT",
+      "label": "R-OUT"
+    },
+    {
+      "id": "IR25",
+      "label": "IR.25"
+    },
+    {
+      "id": "toll",
+      "label": "Toll"
+    }
+  ],
+  "ir25_test_examples": [
+    {
+      "partner": "NTT DOCOMO",
+      "tadig": "JPNDO",
+      "scenario": "S8HR VoLTE Roaming",
+      "home": "NTT DOCOMO (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25 / S8HR",
+      "date_label": "Nov 2023 (example)",
+      "cases": [
+        {
+          "id": "2.2.1",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
         },
-        "sigos": {"result": "fail", "date": "2024-05-09", "campaign": "DEMO-SIGOS-IN-24033"},
-        "nodes": "PBPNNNPNP"
-      },
-      "outbound": {
-        "agreement_status": "not_started",
-        "agreement_pct": 8,
-        "ir21_status": "not_requested",
-        "volte_roaming": false,
-        "tests": {
-          "3g": {"result": "not_run", "pass_rate": null},
-          "lte": {"result": "not_run", "pass_rate": null},
-          "volte": {"result": "not_run", "pass_rate": null},
-          "ims": {"result": "not_run", "pass_rate": null}
+        {
+          "id": "2.2.2",
+          "name": "UE1 (a) calls UE2 (a), both in VPLMN",
+          "result": "PASS"
         },
-        "sigos": {"result": "not_run", "date": null, "campaign": null},
-        "nodes": "NNNNNNNNN"
-      }
+        {
+          "id": "2.2.3",
+          "name": "UE1 (a) calls local number UE3 (b)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.5",
+          "name": "Emergency call (112) — CSFB or IMS",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.1",
+          "name": "SMS-MO/MT between UEs in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.4.1",
+          "name": "Video call (optional / device-dependent)",
+          "result": "FAIL"
+        }
+      ]
+    },
+    {
+      "partner": "Magenta Telekom (Austria)",
+      "tadig": "AUTMM",
+      "scenario": "S8HR VoLTE Roaming",
+      "home": "Magenta Telekom (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25 / S8HR",
+      "date_label": "example pack",
+      "cases": [
+        {
+          "id": "2.2.1.a",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.1.b",
+          "name": "IMS registration of UE2 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.2",
+          "name": "UE1 calls UE2, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.3",
+          "name": "UE2 calls UE1, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.4",
+          "name": "UE1 calls local number UE3",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.5",
+          "name": "Emergency call 112 (CSFB)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.1",
+          "name": "SMS-MO/MT UE1→UE2",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.2",
+          "name": "SMS-MO/MT UE2→UE1",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "partner": "3 UK Hutchison",
+      "tadig": "GBRHU",
+      "scenario": "IR.25 / LTE + VoLTE inbound",
+      "home": "3 UK (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25",
+      "date_label": "example pack",
+      "cases": [
+        {
+          "id": "2.2.1",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.2",
+          "name": "UE1 calls UE2, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.3",
+          "name": "UE1 calls local number UE3",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.4",
+          "name": "Emergency call 112 (CSFB)",
+          "result": "PASS"
+        },
+        {
+          "id": "3.1",
+          "name": "SMS-MO/MT in VPLMN",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "sigos_examples": [
+    {
+      "tool": "SIGOS",
+      "script": "IMS_REGISTER_OK",
+      "purpose": "Inbound VoLTE — IMS registration success on visited network",
+      "location": "France / Paris",
+      "roaming_to": "Bouygues Telecom (demo label)",
+      "ue_type": "Global LTE UE",
+      "highlights": [
+        "LTE attach combined",
+        "IMS APN",
+        "SIP over TCP 5060",
+        "AKA auth",
+        "IPsec optional",
+        "iterations for stability"
+      ],
+      "note": "Portfolio mock of a SIGOS/NFTParker-style script config — no live numbers or secrets"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "VOLTE_EMERGENCYCALL",
+      "purpose": "VoLTE / emergency call behaviour while roaming (112)",
+      "location": "France / Paris",
+      "roaming_by": "Bouygues SIM profile (demo)",
+      "ue_type": "Android",
+      "highlights": [
+        "Emergency number 112",
+        "SOS / emergency APN path",
+        "AMR-NB/WB codecs",
+        "SIP UDP 5060",
+        "PCSCF via DNS"
+      ],
+      "note": "Portfolio mock — parameters illustrative only"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "VOLTE_MO_MT_CALL",
+      "purpose": "MO/MT voice between two roamers on VPLMN",
+      "highlights": [
+        "MO setup",
+        "MT paging/alert",
+        "RTP media",
+        "call release"
+      ],
+      "note": "Typical active test beside IR.25 bilateral lab packs"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "SMS_MO_MT",
+      "purpose": "SMS originating/terminating under LTE/VoLTE roaming",
+      "highlights": [
+        "SMS-MO",
+        "SMS-MT",
+        "delivery reports"
+      ],
+      "note": "Pairs with IR.25 SMS section"
     }
   ]
 }

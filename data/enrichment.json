@@ -1,0 +1,467 @@
+{
+  "disclaimer": "Public portfolio data. Partner brand names reflect a real Olympics-era roaming program at Bouygues Telecom. Test numbers, IMSIs, emails, and live SIGOS configs from source files were NOT copied. Results are illustrative.",
+  "home_network": "Bouygues Telecom",
+  "event": "Paris Olympics 2024",
+  "partners": [
+    {
+      "id": "gbr-3uk",
+      "name": "3 UK (Hutchison)",
+      "country": "United Kingdom",
+      "tadig": "GBRHU",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "aut-tmobile",
+      "name": "T-Mobile Austria",
+      "country": "Austria",
+      "tadig": "AUTMM",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "bel-tb",
+      "name": "Belgium BELTB",
+      "country": "Belgium",
+      "tadig": "BELTB",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "bel-ko-tn",
+      "name": "Belgium BELKO / BELTN",
+      "country": "Belgium",
+      "tadig": "BELKO",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "in_progress",
+      "agreement": "signed"
+    },
+    {
+      "id": "can-bell",
+      "name": "Bell Canada",
+      "country": "Canada",
+      "tadig": "CANBM",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "chn-cmcc",
+      "name": "China Mobile",
+      "country": "China",
+      "tadig": "CHNCT",
+      "direction": "inbound",
+      "tracks": [
+        "LTE",
+        "3G"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "hrv-ht",
+      "name": "Hrvatski Telekom",
+      "country": "Croatia",
+      "tadig": "HRVCN",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "dnk-tdc",
+      "name": "Denmark DNKTD",
+      "country": "Denmark",
+      "tadig": "DNKTD",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "jpn-kddi",
+      "name": "KDDI",
+      "country": "Japan",
+      "tadig": "JPNKD",
+      "direction": "inbound",
+      "tracks": [
+        "LTE",
+        "VoLTE"
+      ],
+      "ir21": "in_progress",
+      "agreement": "signed"
+    },
+    {
+      "id": "kor-lg-out",
+      "name": "LG U+ (outbound VoLTE IR.25)",
+      "country": "South Korea",
+      "tadig": "KORLG",
+      "direction": "outbound",
+      "tracks": [
+        "VoLTE",
+        "R-OUT",
+        "IR25"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "kor-lg-toll",
+      "name": "LG U+ (outbound toll)",
+      "country": "South Korea",
+      "tadig": "KORLG",
+      "direction": "outbound",
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "lux-pt",
+      "name": "Luxembourg LUXPT",
+      "country": "Luxembourg",
+      "tadig": "LUXPT",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "lux-tg",
+      "name": "Luxembourg LUXTG",
+      "country": "Luxembourg",
+      "tadig": "LUXTG",
+      "direction": "inbound",
+      "tracks": [
+        "R-IN"
+      ],
+      "ir21": "in_progress",
+      "agreement": "signed"
+    },
+    {
+      "id": "mex-mextel",
+      "name": "Mextel Mexico",
+      "country": "Mexico",
+      "tadig": "MEXMT",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "pending",
+      "agreement": "negotiation"
+    },
+    {
+      "id": "jpn-docomo-in",
+      "name": "NTT DOCOMO (inbound VoLTE)",
+      "country": "Japan",
+      "tadig": "JPNDO",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN",
+        "IR25"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "jpn-docomo-out",
+      "name": "NTT DOCOMO (outbound toll)",
+      "country": "Japan",
+      "tadig": "JPNDO",
+      "direction": "outbound",
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "pol-02",
+      "name": "Poland POL02",
+      "country": "Poland",
+      "tadig": "POL02",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "che-swisscom-in",
+      "name": "Swisscom (inbound VoLTE)",
+      "country": "Switzerland",
+      "tadig": "CHE01",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "che-swisscom-out",
+      "name": "Swisscom (outbound toll)",
+      "country": "Switzerland",
+      "tadig": "CHE01",
+      "direction": "outbound",
+      "tracks": [
+        "R-OUT",
+        "toll"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    },
+    {
+      "id": "esp-telefonica",
+      "name": "Telef\u00f3nica",
+      "country": "Spain",
+      "tadig": "ESPTE",
+      "direction": "both",
+      "tracks": [
+        "LTE",
+        "VoLTE"
+      ],
+      "ir21": "in_progress",
+      "agreement": "signed"
+    },
+    {
+      "id": "deu-telekom",
+      "name": "Telekom Germany",
+      "country": "Germany",
+      "tadig": "DEUD1",
+      "direction": "inbound",
+      "tracks": [
+        "VoLTE",
+        "R-IN"
+      ],
+      "ir21": "validated",
+      "agreement": "live"
+    }
+  ],
+  "ir25_test_examples": [
+    {
+      "partner": "NTT DOCOMO",
+      "tadig": "JPNDO",
+      "scenario": "S8HR VoLTE Roaming",
+      "home": "NTT DOCOMO (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25 / S8HR",
+      "date_label": "Nov 2023 (example)",
+      "cases": [
+        {
+          "id": "2.2.1",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.2",
+          "name": "UE1 (a) calls UE2 (a), both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.3",
+          "name": "UE1 (a) calls local number UE3 (b)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.5",
+          "name": "Emergency call (112) \u2014 CSFB or IMS",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.1",
+          "name": "SMS-MO/MT between UEs in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.4.1",
+          "name": "Video call (optional / device-dependent)",
+          "result": "FAIL"
+        }
+      ]
+    },
+    {
+      "partner": "Magenta Telekom (Austria)",
+      "tadig": "AUTMM",
+      "scenario": "S8HR VoLTE Roaming",
+      "home": "Magenta Telekom (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25 / S8HR",
+      "date_label": "example pack",
+      "cases": [
+        {
+          "id": "2.2.1.a",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.1.b",
+          "name": "IMS registration of UE2 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.2",
+          "name": "UE1 calls UE2, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.3",
+          "name": "UE2 calls UE1, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.4",
+          "name": "UE1 calls local number UE3",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.5",
+          "name": "Emergency call 112 (CSFB)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.1",
+          "name": "SMS-MO/MT UE1\u2192UE2",
+          "result": "PASS"
+        },
+        {
+          "id": "2.3.2",
+          "name": "SMS-MO/MT UE2\u2192UE1",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "partner": "3 UK Hutchison",
+      "tadig": "GBRHU",
+      "scenario": "IR.25 / LTE + VoLTE inbound",
+      "home": "3 UK (HPLMN)",
+      "visited": "Bouygues Telecom FRAF3 (VPLMN)",
+      "standard": "GSMA IR.25",
+      "date_label": "example pack",
+      "cases": [
+        {
+          "id": "2.2.1",
+          "name": "IMS registration of UE1 (a)",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.2",
+          "name": "UE1 calls UE2, both in VPLMN",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.3",
+          "name": "UE1 calls local number UE3",
+          "result": "PASS"
+        },
+        {
+          "id": "2.2.4",
+          "name": "Emergency call 112 (CSFB)",
+          "result": "PASS"
+        },
+        {
+          "id": "3.1",
+          "name": "SMS-MO/MT in VPLMN",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "sigos_examples": [
+    {
+      "tool": "SIGOS",
+      "script": "IMS_REGISTER_OK",
+      "purpose": "Inbound VoLTE \u2014 IMS registration success on visited network",
+      "location": "France / Paris",
+      "roaming_to": "Bouygues Telecom (demo label)",
+      "ue_type": "Global LTE UE",
+      "highlights": [
+        "LTE attach combined",
+        "IMS APN",
+        "SIP over TCP 5060",
+        "AKA auth",
+        "IPsec optional",
+        "iterations for stability"
+      ],
+      "note": "Portfolio mock of a SIGOS/NFTParker-style script config \u2014 no live numbers or secrets"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "VOLTE_EMERGENCYCALL",
+      "purpose": "VoLTE / emergency call behaviour while roaming (112)",
+      "location": "France / Paris",
+      "roaming_by": "Bouygues SIM profile (demo)",
+      "ue_type": "Android",
+      "highlights": [
+        "Emergency number 112",
+        "SOS / emergency APN path",
+        "AMR-NB/WB codecs",
+        "SIP UDP 5060",
+        "PCSCF via DNS"
+      ],
+      "note": "Portfolio mock \u2014 parameters illustrative only"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "VOLTE_MO_MT_CALL",
+      "purpose": "MO/MT voice between two roamers on VPLMN",
+      "highlights": [
+        "MO setup",
+        "MT paging/alert",
+        "RTP media",
+        "call release"
+      ],
+      "note": "Typical active test beside IR.25 bilateral lab packs"
+    },
+    {
+      "tool": "SIGOS",
+      "script": "SMS_MO_MT",
+      "purpose": "SMS originating/terminating under LTE/VoLTE roaming",
+      "highlights": [
+        "SMS-MO",
+        "SMS-MT",
+        "delivery reports"
+      ],
+      "note": "Pairs with IR.25 SMS section"
+    }
+  ]
+}

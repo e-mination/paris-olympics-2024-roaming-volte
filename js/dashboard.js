@@ -7,8 +7,7 @@
     region: "all",
     agreement: "all",
     ir21: "all",
-    sigos: "all",
-    tech: "all",
+    track: "all",
     q: "",
     sortKey: "agreement",
     sortDir: 1
@@ -28,7 +27,10 @@
     requested: "Requested",
     received: "Received",
     validated: "Validated",
+    pending: "Pending",
     pass: "Pass",
+    PASS: "PASS",
+    FAIL: "FAIL",
     partial: "Partial",
     fail: "Fail",
     not_run: "Not run",
@@ -43,6 +45,7 @@
     not_requested: 0,
     requested: 1,
     received: 2,
+    pending: 0,
     validated: 3,
     not_started: 0,
     negotiation: 1,
@@ -123,7 +126,7 @@
       STATE.heatmapDirection = button.getAttribute("data-heat");
       renderHeatmap();
     });
-    ["region", "agreement", "ir21", "sigos", "tech"].forEach(function (id) {
+    ["region", "agreement", "ir21", "track"].forEach(function (id) {
       document.getElementById(id).addEventListener("change", function (event) {
         STATE[id] = event.target.value;
         renderTable();
@@ -137,14 +140,12 @@
       STATE.region = "all";
       STATE.agreement = "all";
       STATE.ir21 = "all";
-      STATE.sigos = "all";
-      STATE.tech = "all";
+      STATE.track = "all";
       STATE.q = "";
       document.getElementById("region").value = "all";
       document.getElementById("agreement").value = "all";
       document.getElementById("ir21").value = "all";
-      document.getElementById("sigos").value = "all";
-      document.getElementById("tech").value = "all";
+      document.getElementById("track").value = "all";
       document.getElementById("q").value = "";
       renderTable();
     });
@@ -219,6 +220,12 @@
       options.push('<option value="' + esc(region) + '">' + esc(region) + "</option>");
     });
     select.innerHTML = options.join("");
+    var track = document.getElementById("track");
+    var trackOptions = ['<option value="all">Any track</option>'];
+    DATA.tracks.forEach(function (item) {
+      trackOptions.push('<option value="' + esc(item.id) + '">' + esc(item.label) + "</option>");
+    });
+    track.innerHTML = trackOptions.join("");
   }
 
   function renderAll() {
@@ -229,6 +236,7 @@
     renderCharts();
     renderRegions();
     renderHeatmap();
+    renderExamples();
     renderTimeline();
     renderTools();
     renderTable();
@@ -241,15 +249,16 @@
       ["Snapshot", formatDate(meta.snapshot_date), "Program view, not a live feed"],
       ["Opening Ceremony", formatDate(meta.opening_ceremony), daysBetween(meta.snapshot_date, meta.opening_ceremony) + " days"],
       ["Config freeze", formatDate(freeze.start), daysBetween(meta.snapshot_date, freeze.start) + " days"],
-      ["Partners", String(DATA.partners.length) + " synthetic", "Inbound and outbound"]
+      ["Partners", String(DATA.partners.length), "Olympics partner set"]
     ];
     document.getElementById("facts").innerHTML = facts.map(function (fact) {
       return "<div><dt>" + esc(fact[0]) + "</dt><dd>" + esc(fact[1]) + "<span>" + esc(fact[2]) + "</span></dd></div>";
     }).join("");
     document.getElementById("definition").textContent =
-      "Main KPI: share of partner roaming agreements that are signed or live. " +
-      "IR.21, node enablement, and SIGOS results are the readiness underneath that number. " +
-      "VoLTE and IMS are test tracks, not the name of the program.";
+      "Main KPI: share of direction lines whose roaming agreement is signed or live. " +
+      "A partner marked in both directions counts twice. " +
+      "IR.21 and the VoLTE / IR.25 tracks sit under that number. " +
+      "The checklist is a sketch, not a live configuration.";
   }
 
   function renderDirectionControls() {
@@ -267,8 +276,8 @@
       kpiCard("Inbound agreements", inbound, "agreements", "kpi-primary-in", STATE.direction === "outbound"),
       kpiCard("Outbound agreements", outbound, "agreements", "kpi-primary-out", STATE.direction === "inbound"),
       secondaryCard("IR.21 validated", inbound, outbound, focus, "ir21"),
-      secondaryCard("Latest SIGOS pass", inbound, outbound, focus, "sigos"),
-      secondaryCard("Checklist done", inbound, outbound, focus, "checklist")
+      secondaryCard("VoLTE track", inbound, outbound, focus, "volte"),
+      secondaryCard("IR.25 track", inbound, outbound, focus, "ir25")
     ];
     document.getElementById("kpis").innerHTML = cards.join("");
   }
@@ -287,9 +296,9 @@
   }
 
   function secondaryCard(labelText, inbound, outbound, focus, kind) {
-    var field = kind === "ir21" ? "ir21_pct" : kind === "sigos" ? "sigos_pass_pct" : "checklist_pct";
-    var countField = kind === "ir21" ? "ir21_validated" : kind === "sigos" ? "sigos_pass" : "checklist_done";
-    var totalField = kind === "checklist" ? "checklist_total" : "partners";
+    var field = kind === "ir21" ? "ir21_pct" : kind === "volte" ? "volte_pct" : "ir25_pct";
+    var countField = kind === "ir21" ? "ir21_validated" : kind === "volte" ? "volte_count" : "ir25_count";
+    var totalField = "partners";
     if (focus) {
       return (
         '<article class="kpi">' +
@@ -324,8 +333,8 @@
     box.innerHTML =
       "<h2>" + items.length + " checklist " + noun + " blocked at this snapshot</h2>" +
       "<ul>" + items.map(function (item) {
-        return '<li><button type="button" class="text-btn" data-jump="' + esc(item.partner.id) + '" data-dir="' + esc(item.direction) + '">' +
-          esc(item.partner.id) + " · " + esc(label(item.direction)) + " · " + esc(item.node.name) +
+        return '<li><button type="button" class="text-btn" data-jump="' + esc(item.partner.name) + '" data-dir="' + esc(item.direction) + '">' +
+          esc(item.partner.name) + " · " + esc(label(item.direction)) + " · " + esc(item.node.name) +
           "</button></li>";
       }).join("") + "</ul>";
   }
@@ -350,7 +359,7 @@
   function renderCompareChart() {
     var inbound = metrics("inbound");
     var outbound = metrics("outbound");
-    var labels = ["Agreements", "IR.21", "SIGOS pass", "Checklist"];
+    var labels = ["Agreements", "IR.21", "VoLTE", "IR.25"];
     mountChart("chart-compare", {
       type: "bar",
       data: {
@@ -359,24 +368,24 @@
           dataset("Inbound", [
             inbound.agreements_pct,
             inbound.ir21_pct,
-            inbound.sigos_pass_pct,
-            inbound.checklist_pct
+            inbound.volte_pct,
+            inbound.ir25_pct
           ], "--inbound", [
             inbound.agreements_completed + "/" + inbound.partners,
             inbound.ir21_validated + "/" + inbound.partners,
-            inbound.sigos_pass + "/" + inbound.partners,
-            inbound.checklist_done + "/" + inbound.checklist_total
+            inbound.volte_count + "/" + inbound.partners,
+            inbound.ir25_count + "/" + inbound.partners
           ], STATE.direction === "outbound"),
           dataset("Outbound", [
             outbound.agreements_pct,
             outbound.ir21_pct,
-            outbound.sigos_pass_pct,
-            outbound.checklist_pct
+            outbound.volte_pct,
+            outbound.ir25_pct
           ], "--outbound", [
             outbound.agreements_completed + "/" + outbound.partners,
             outbound.ir21_validated + "/" + outbound.partners,
-            outbound.sigos_pass + "/" + outbound.partners,
-            outbound.checklist_done + "/" + outbound.checklist_total
+            outbound.volte_count + "/" + outbound.partners,
+            outbound.ir25_count + "/" + outbound.partners
           ], STATE.direction === "inbound")
         ]
       },
@@ -419,20 +428,19 @@
   }
 
   function renderTechChart() {
-    var labels = DATA.technologies.map(function (tech) { return tech.label; });
+    var labels = DATA.tracks.map(function (track) { return track.label; });
     mountChart("chart-tech", {
       type: "bar",
       data: {
         labels: labels,
         datasets: ["inbound", "outbound"].map(function (direction) {
-          var stats = techStats(direction);
+          var rows = rowsFor(direction);
           return dataset(
             label(direction),
-            DATA.technologies.map(function (tech) { return stats[tech.id].mean; }),
+            DATA.tracks.map(function (track) { return trackPct(rows, track.id); }),
             direction === "inbound" ? "--inbound" : "--outbound",
-            DATA.technologies.map(function (tech) {
-              var stat = stats[tech.id];
-              return stat.tested + " tested · " + stat.pass + " pass";
+            DATA.tracks.map(function (track) {
+              return trackCount(rows, track.id) + "/" + rows.length;
             }),
             STATE.direction !== "all" && STATE.direction !== direction
           );
@@ -447,7 +455,7 @@
     var note = document.getElementById("node-chart-note");
     if (STATE.direction === "all") {
       title.textContent = "Checklist completion, inbound vs outbound";
-      note.textContent = "Share of partners with that item done. Open the heatmap for blocked and in-progress cells.";
+      note.textContent = "Share of direction lines with that checklist item marked done. The sketch is derived from agreement, IR.21, and tracks.";
       var inboundItems = itemDonePct("inbound");
       var outboundItems = itemDonePct("outbound");
       mountChart("chart-nodes", {
@@ -465,7 +473,7 @@
     }
     var mix = itemMix(STATE.direction);
     title.textContent = label(STATE.direction) + " checklist mix";
-    note.textContent = "Counts across " + DATA.partners.length + " synthetic partners. IMS/CSCF is the VoLTE roaming track.";
+    note.textContent = "Counts across " + rowsFor(STATE.direction).length + " direction lines. Derived sketch, not a live extract.";
     mountChart("chart-nodes", {
       type: "bar",
       data: {
@@ -489,7 +497,7 @@
           x: {
             stacked: true,
             beginAtZero: true,
-            max: DATA.partners.length,
+            max: rowsFor(STATE.direction).length,
             ticks: { color: token("--chart-text"), precision: 0 },
             grid: { color: token("--chart-grid") }
           },
@@ -506,18 +514,20 @@
   function renderRegions() {
     var directions = STATE.direction === "all" ? ["inbound", "outbound"] : [STATE.direction];
     var html = DATA.meta.region_order.map(function (region) {
-      var partners = DATA.partners.filter(function (partner) { return partner.region === region; });
+      var inRegion = DATA.partners.filter(function (partner) { return partner.region === region; });
       var rows = directions.map(function (direction) {
-        var done = partners.filter(function (partner) {
-          return isComplete(partner[direction].agreement_status);
-        }).length;
-        var value = partners.length ? (100 * done) / partners.length : 0;
+        var partners = inRegion.filter(function (partner) { return partner.directions.indexOf(direction) !== -1; });
+        if (!partners.length) {
+          return '<div class="pair"><span class="lbl">' + esc(shortDir(direction)) + " —</span><div class=\"track\"></div></div>";
+        }
+        var done = partners.filter(function (partner) { return isComplete(partner.agreement_status); }).length;
+        var value = (100 * done) / partners.length;
         return (
           '<div class="pair"><span class="lbl">' + esc(shortDir(direction)) + " " + done + "/" + partners.length + "</span>" +
           '<div class="track' + (direction === "outbound" ? " out" : "") + '"><span style="width:' + value + '%"></span></div></div>'
         );
       }).join("");
-      return '<div class="region"><div class="region-name">' + esc(region) + "<span>" + partners.length + " partners</span></div><div>" + rows + "</div></div>";
+      return '<div class="region"><div class="region-name">' + esc(region) + "<span>" + inRegion.length + " partners</span></div><div>" + rows + "</div></div>";
     }).join("");
     document.getElementById("regions").innerHTML = html;
   }
@@ -531,13 +541,13 @@
     var head = "<tr><th>Partner</th>" + DATA.checklist.map(function (item) {
       return '<th title="' + esc(item.name) + '">' + esc(item.short) + "</th>";
     }).join("") + "</tr>";
-    var body = DATA.partners.map(function (partner) {
-      var nodes = decodeNodes(partner[direction].nodes);
+    var body = rowsFor(direction).map(function (partner) {
+      var nodes = decodeNodes(partner.nodes);
       var cells = nodes.map(function (node) {
         var letter = node.status === "not_started" ? "—" : node.code;
-        return '<td class="cell cell-' + node.status + '" title="' + esc(partner.id + " · " + label(direction) + " · " + node.name + " · " + label(node.status)) + '">' + esc(letter) + "</td>";
+        return '<td class="cell cell-' + node.status + '" title="' + esc(partner.name + " · " + partner.tadig + " · " + label(direction) + " · " + node.name + " · " + label(node.status)) + '">' + esc(letter) + "</td>";
       }).join("");
-      return "<tr><td><span class=\"partner-id\">" + esc(partner.id) + '</span> <span class="demo-tag">DEMO</span></td>' + cells + "</tr>";
+      return "<tr><td><span class=\"partner-id\">" + esc(partner.name) + '</span> <span class="demo-tag">DEMO</span><span class="sub">' + esc(partner.tadig) + "</span></td>" + cells + "</tr>";
     }).join("");
     document.getElementById("heatmap").innerHTML = '<table class="heatmap"><thead>' + head + "</thead><tbody>" + body + "</tbody></table>";
     document.getElementById("legend").innerHTML = [
@@ -549,7 +559,31 @@
       return '<li><i class="cell-' + item[1] + '">' + item[0] + "</i> " + item[2] + "</li>";
     }).join("");
     document.getElementById("heatmap-caption").textContent =
-      label(direction) + " roaming enablement. Example PLMNs use test MCC 001 and are not live networks.";
+      label(direction) + " roaming enablement for the Olympics partner set. Cells are a readiness sketch derived from agreement, IR.21, and tracks — not a live configuration.";
+  }
+
+  function renderExamples() {
+    document.getElementById("ir25-tables").innerHTML = DATA.ir25_test_examples.map(function (pack) {
+      var pass = pack.cases.filter(function (item) { return item.result === "PASS"; }).length;
+      var fail = pack.cases.length - pass;
+      var rows = pack.cases.map(function (item) {
+        var klass = item.result === "PASS" ? "pass" : "fail";
+        return "<tr><td>" + esc(item.id) + "</td><td>" + esc(item.name) + '</td><td><span class="pill ' + klass + '">' + esc(item.result) + "</span></td></tr>";
+      }).join("");
+      return '<article class="card"><h3>' + esc(pack.partner) + "</h3>" +
+        '<p class="ir25-meta">' + esc(pack.tadig) + " · " + esc(pack.scenario) + " · " + esc(pack.date_label) + " · " + pass + " pass · " + fail + " fail</p>" +
+        '<p class="ir25-meta">Home ' + esc(pack.home) + " · Visited " + esc(pack.visited) + " · " + esc(pack.standard) + "</p>" +
+        '<table class="ir25-table"><thead><tr><th>Case</th><th>Name</th><th>Result</th></tr></thead><tbody>' + rows + "</tbody></table></article>";
+    }).join("");
+    document.getElementById("sigos-cards").innerHTML = DATA.sigos_examples.map(function (card) {
+      var chips = (card.highlights || []).map(function (item) {
+        return '<span class="chip">' + esc(item) + "</span>";
+      }).join("");
+      var where = [card.location, card.ue_type, card.roaming_to, card.roaming_by].filter(Boolean).join(" · ");
+      return '<article class="card"><p class="tool-role">' + esc(card.tool) + "</p><h3 class=\"script-name\">" + esc(card.script) + "</h3><p>" +
+        esc(card.purpose) + "</p>" + (where ? '<p class="ir25-meta">' + esc(where) + "</p>" : "") +
+        '<div class="chips">' + chips + '</div><p class="ir25-meta">' + esc(card.note) + "</p></article>";
+    }).join("");
   }
 
   function renderTimeline() {
@@ -593,35 +627,28 @@
     document.getElementById("row-count").textContent = rows.length + (rows.length === 1 ? " row" : " rows");
     var body = document.getElementById("partner-rows");
     if (!rows.length) {
-      body.innerHTML = '<tr><td class="empty" colspan="12">No partners match these filters.</td></tr>';
+      body.innerHTML = '<tr><td class="empty" colspan="8">No partners match these filters.</td></tr>';
       return;
     }
     body.innerHTML = rows.map(function (row) {
-      var rec = row.rec;
-      var nodes = decodeNodes(rec.nodes);
+      var partner = row.partner;
+      var nodes = decodeNodes(partner.nodes);
       var done = nodes.filter(function (node) { return node.status === "done"; }).length;
-      var blocked = nodes.some(function (node) { return node.status === "blocked"; });
-      var sigosTitle = rec.sigos.campaign ? rec.sigos.campaign : "No campaign";
+      var tracks = partner.tracks.map(function (track) {
+        return '<span class="chip">' + esc(track === "IR25" ? "IR.25" : track) + "</span>";
+      }).join(" ");
       return "<tr>" +
-        "<td><span class=\"partner-id\">" + esc(row.partner.id) + '</span> <span class="demo-tag">DEMO</span></td>' +
-        "<td>" + esc(row.partner.region) + "</td>" +
+        "<td><span class=\"partner-id\">" + esc(partner.name) + '</span> <span class="demo-tag">DEMO</span></td>' +
+        "<td>" + esc(partner.country) + "</td>" +
+        "<td>" + esc(partner.tadig) + "</td>" +
         "<td>" + esc(label(row.direction)) + "</td>" +
-        "<td><span class=\"pill " + rec.agreement_status + "\">" + esc(label(rec.agreement_status)) + "</span>" +
-          '<div class="mini"><span class="sub">' + rec.agreement_pct + '% stage</span><div class="bar"><span style="width:' + rec.agreement_pct + '%"></span></div></div></td>' +
-        "<td><span class=\"pill " + rec.ir21_status + "\">" + esc(label(rec.ir21_status)) + "</span></td>" +
-        techCell(rec, "3g") + techCell(rec, "lte") + techCell(rec, "volte") + techCell(rec, "ims") +
-        '<td title="' + esc(sigosTitle) + '"><span class="pill ' + rec.sigos.result + '">' + esc(label(rec.sigos.result)) + "</span>" +
-          (rec.sigos.date ? '<span class="sub">' + esc(formatDate(rec.sigos.date)) + "</span>" : "") + "</td>" +
-        "<td>" + done + "/" + nodes.length + (blocked ? ' <span class="pill blocked">Blocked</span>' : "") + "</td>" +
-        '<td><span class="sub">' + esc(row.partner.example_plmn) + "</span></td>" +
+        "<td><span class=\"pill " + partner.agreement_status + "\">" + esc(label(partner.agreement_status)) + "</span>" +
+          '<div class="mini"><span class="sub">' + partner.agreement_pct + '% stage</span><div class="bar"><span style="width:' + partner.agreement_pct + '%"></span></div></div></td>' +
+        "<td><span class=\"pill " + partner.ir21_status + "\">" + esc(label(partner.ir21_status)) + "</span></td>" +
+        "<td>" + tracks + "</td>" +
+        "<td>" + done + "/" + nodes.length + "</td>" +
         "</tr>";
     }).join("");
-  }
-
-  function techCell(rec, id) {
-    var test = rec.tests[id];
-    var rate = test.result === "not_run" ? "" : '<span class="sub">' + fmtPct(test.pass_rate) + "%</span>";
-    return '<td><span class="pill ' + test.result + '">' + esc(label(test.result)) + "</span>" + rate + "</td>";
   }
 
   function filteredRows() {
@@ -630,18 +657,17 @@
     var rows = [];
     DATA.partners.forEach(function (partner) {
       directions.forEach(function (direction) {
-        var rec = partner[direction];
+        if (partner.directions.indexOf(direction) === -1) return;
         if (STATE.region !== "all" && partner.region !== STATE.region) return;
-        if (STATE.agreement === "completed" && !isComplete(rec.agreement_status)) return;
-        if (STATE.agreement === "open" && isComplete(rec.agreement_status)) return;
-        if (STATE.ir21 !== "all" && rec.ir21_status !== STATE.ir21) return;
-        if (STATE.sigos !== "all" && rec.sigos.result !== STATE.sigos) return;
-        if (STATE.tech !== "all" && rec.tests[STATE.tech].result === "pass") return;
+        if (STATE.agreement === "completed" && !isComplete(partner.agreement_status)) return;
+        if (STATE.agreement === "open" && isComplete(partner.agreement_status)) return;
+        if (STATE.ir21 !== "all" && partner.ir21_status !== STATE.ir21) return;
+        if (STATE.track !== "all" && partner.tracks.indexOf(STATE.track) === -1) return;
         if (query) {
-          var hay = (partner.id + " " + partner.region + " " + partner.example_plmn + " " + (rec.sigos.campaign || "")).toLowerCase();
+          var hay = (partner.name + " " + partner.country + " " + partner.region + " " + partner.tadig + " " + partner.tracks.join(" ")).toLowerCase();
           if (hay.indexOf(query) === -1) return;
         }
-        rows.push({ partner: partner, direction: direction, rec: rec });
+        rows.push({ partner: partner, direction: direction });
       });
     });
     return rows;
@@ -654,8 +680,8 @@
       var bv = sortValue(b);
       if (av < bv) return -1 * dir;
       if (av > bv) return 1 * dir;
-      if (a.partner.id < b.partner.id) return -1;
-      if (a.partner.id > b.partner.id) return 1;
+      if (a.partner.name < b.partner.name) return -1;
+      if (a.partner.name > b.partner.name) return 1;
       if (a.direction < b.direction) return -1;
       if (a.direction > b.direction) return 1;
       return 0;
@@ -663,27 +689,43 @@
   }
 
   function sortValue(row) {
-    if (STATE.sortKey === "partner") return row.partner.id;
-    if (STATE.sortKey === "region") return row.partner.region;
+    if (STATE.sortKey === "partner") return row.partner.name;
+    if (STATE.sortKey === "country") return row.partner.country;
+    if (STATE.sortKey === "tadig") return row.partner.tadig;
     if (STATE.sortKey === "direction") return row.direction;
-    if (STATE.sortKey === "agreement") return row.rec.agreement_pct;
-    if (STATE.sortKey === "ir21") return RANK[row.rec.ir21_status];
-    if (STATE.sortKey === "sigos") return RANK[row.rec.sigos.result];
+    if (STATE.sortKey === "agreement") return row.partner.agreement_pct;
+    if (STATE.sortKey === "ir21") return RANK[row.partner.ir21_status];
+    if (STATE.sortKey === "tracks") return row.partner.tracks.join(",");
     if (STATE.sortKey === "nodes") {
-      return decodeNodes(row.rec.nodes).filter(function (node) { return node.status === "done"; }).length;
+      return decodeNodes(row.partner.nodes).filter(function (node) { return node.status === "done"; }).length;
     }
-    return row.partner.id;
+    return row.partner.name;
+  }
+
+  function rowsFor(direction) {
+    return DATA.partners.filter(function (partner) {
+      return partner.directions.indexOf(direction) !== -1;
+    });
+  }
+
+  function trackCount(rows, id) {
+    return rows.filter(function (partner) { return partner.tracks.indexOf(id) !== -1; }).length;
+  }
+
+  function trackPct(rows, id) {
+    return percent(trackCount(rows, id), rows.length);
   }
 
   function metrics(direction) {
-    var rows = DATA.partners.map(function (partner) { return partner[direction]; });
+    var rows = rowsFor(direction);
     var total = rows.length;
-    var agreements = rows.filter(function (rec) { return isComplete(rec.agreement_status); }).length;
-    var ir21 = rows.filter(function (rec) { return rec.ir21_status === "validated"; }).length;
-    var sigosPass = rows.filter(function (rec) { return rec.sigos.result === "pass"; }).length;
+    var agreements = rows.filter(function (partner) { return isComplete(partner.agreement_status); }).length;
+    var ir21 = rows.filter(function (partner) { return partner.ir21_status === "validated"; }).length;
+    var volte = trackCount(rows, "VoLTE");
+    var ir25 = trackCount(rows, "IR25");
     var done = 0;
-    rows.forEach(function (rec) {
-      decodeNodes(rec.nodes).forEach(function (node) {
+    rows.forEach(function (partner) {
+      decodeNodes(partner.nodes).forEach(function (node) {
         if (node.status === "done") done += 1;
       });
     });
@@ -694,48 +736,33 @@
       agreements_pct: percent(agreements, total),
       ir21_validated: ir21,
       ir21_pct: percent(ir21, total),
-      sigos_pass: sigosPass,
-      sigos_pass_pct: percent(sigosPass, total),
+      volte_count: volte,
+      volte_pct: percent(volte, total),
+      ir25_count: ir25,
+      ir25_pct: percent(ir25, total),
       checklist_done: done,
       checklist_total: cells,
       checklist_pct: percent(done, cells)
     };
   }
 
-  function techStats(direction) {
-    var stats = {};
-    DATA.technologies.forEach(function (tech) {
-      var rates = [];
-      var pass = 0;
-      var tested = 0;
-      DATA.partners.forEach(function (partner) {
-        var test = partner[direction].tests[tech.id];
-        if (test.result === "not_run") return;
-        tested += 1;
-        if (test.result === "pass") pass += 1;
-        if (typeof test.pass_rate === "number") rates.push(test.pass_rate);
-      });
-      var mean = rates.length ? rates.reduce(function (sum, value) { return sum + value; }, 0) / rates.length : null;
-      stats[tech.id] = { mean: mean, tested: tested, pass: pass };
-    });
-    return stats;
-  }
-
   function itemDonePct(direction) {
+    var rows = rowsFor(direction);
     return DATA.checklist.map(function (item, index) {
-      var done = DATA.partners.filter(function (partner) {
-        return decodeNodes(partner[direction].nodes)[index].status === "done";
+      var done = rows.filter(function (partner) {
+        return decodeNodes(partner.nodes)[index].status === "done";
       }).length;
-      return percent(done, DATA.partners.length);
+      return percent(done, rows.length);
     });
   }
 
   function itemMix(direction) {
+    var rows = rowsFor(direction);
     var mix = { done: [], in_progress: [], blocked: [], not_started: [] };
     DATA.checklist.forEach(function (item, index) {
       var counts = { done: 0, in_progress: 0, blocked: 0, not_started: 0 };
-      DATA.partners.forEach(function (partner) {
-        counts[decodeNodes(partner[direction].nodes)[index].status] += 1;
+      rows.forEach(function (partner) {
+        counts[decodeNodes(partner.nodes)[index].status] += 1;
       });
       Object.keys(mix).forEach(function (key) { mix[key].push(counts[key]); });
     });
@@ -745,10 +772,16 @@
   function blockers(direction) {
     var directions = direction === "all" ? ["inbound", "outbound"] : [direction];
     var items = [];
+    var seen = {};
     DATA.partners.forEach(function (partner) {
       directions.forEach(function (dir) {
-        decodeNodes(partner[dir].nodes).forEach(function (node) {
-          if (node.status === "blocked") items.push({ partner: partner, direction: dir, node: node });
+        if (partner.directions.indexOf(dir) === -1) return;
+        decodeNodes(partner.nodes).forEach(function (node) {
+          if (node.status !== "blocked") return;
+          var key = partner.id + dir + node.id;
+          if (seen[key]) return;
+          seen[key] = true;
+          items.push({ partner: partner, direction: dir, node: node });
         });
       });
     });

@@ -32,7 +32,7 @@
   <div class="banner" role="note">
     <div class="wrap banner-inner">
       <strong>Portfolio demo — fictional data, not real operator agreements or live configs.</strong>
-      <span>Inspired by inbound and outbound roaming work at Bouygues Telecom for the Paris 2024 Games. Not an official Bouygues Telecom publication. Partners, PLMNs, IR.21 states, and test results are synthetic.</span>
+      <span>Partner names and TADIGs are from the Paris 2024 roaming partner set at Bouygues Telecom. Not an official Bouygues Telecom publication. IR.25 tables and SIGOS cards are illustrative examples derived from IR.25 S8HR structure and SIGOS-style test scripts (IMS register, emergency 112, MO/MT, SMS), not live exports.</span>
     </div>
   </div>
 
@@ -43,7 +43,7 @@
         <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
       </div>
       <h1>Olympics 2024 Roaming Program</h1>
-      <p class="lede">Inbound and outbound roaming agreements, IR.21 completeness, and core-node enablement for the Paris Games. VoLTE and IMS sit under roaming as test tracks.</p>
+      <p class="lede">Inbound and outbound roaming agreements, IR.21 completeness, and track coverage for the Paris Games partner set. VoLTE, R-IN, R-OUT, and IR.25 are tracks under roaming.</p>
       <div class="header-row">
         <dl class="facts" id="facts">
           <div><dt>Snapshot</dt><dd>Loading…</dd></div>
@@ -76,14 +76,14 @@
         <div class="chart-grid">
           <article class="card">
             <h2>Inbound vs outbound</h2>
-            <p class="section-note">Agreements are the headline. IR.21, the latest SIGOS pass, and checklist completion show whether the signature is actually ready.</p>
+            <p class="section-note">Agreements are the headline. IR.21 validated, the VoLTE track, and the IR.25 track sit beside that number. Counts are direction lines.</p>
             <div class="chart-box" role="img" aria-label="Grouped bars comparing inbound and outbound completion">
               <canvas id="chart-compare"></canvas>
             </div>
           </article>
           <article class="card">
             <h2>Agreement progress toward the Games</h2>
-            <p class="section-note">Share of partners with a signed or live agreement, by month, through the 12 June 2024 snapshot. No forecast after that date.</p>
+            <p class="section-note">Illustrative curve ending on the 12 June 2024 partner-set totals. Not a RoamSys history export, and no forecast after the snapshot.</p>
             <div class="chart-box" role="img" aria-label="Line chart of inbound and outbound agreement completion over time">
               <canvas id="chart-trend"></canvas>
             </div>
@@ -95,9 +95,9 @@
       <section id="tests">
         <div class="chart-grid">
           <article class="card">
-            <h2>Test pass rate by technology</h2>
-            <p class="section-note">Mean pass rate where a SIGOS result exists. 3G, LTE, VoLTE, and IMS are roaming test domains. Not run is left out of the average.</p>
-            <div class="chart-box" role="img" aria-label="Pass rates for 3G, LTE, VoLTE, and IMS">
+            <h2>Track coverage</h2>
+            <p class="section-note">Share of direction lines that include each track. This is coverage of the partner set, not a SIGOS pass-rate export.</p>
+            <div class="chart-box" role="img" aria-label="Track coverage for 3G, LTE, VoLTE, R-IN, R-OUT, IR.25, and toll">
               <canvas id="chart-tech"></canvas>
             </div>
           </article>
@@ -116,7 +116,7 @@
           <div>
             <p class="section-kicker">Regions</p>
             <h2 id="region-heading">Agreements by region</h2>
-            <p class="section-note">Same completion rule: signed or live. Partner names stay anonymous.</p>
+            <p class="section-note">Signed or live, grouped by country. A partner in both directions is counted on each bar.</p>
           </div>
         </div>
         <div class="card regions" id="regions"></div>
@@ -127,7 +127,7 @@
           <div>
             <p class="section-kicker">Nodes</p>
             <h2 id="heatmap-heading">Roaming enablement by partner</h2>
-            <p class="section-note">IR.21, steering, APN, HSS/UDM, DRA/STP, PGW/SMF, firewall, IMS/CSCF (the VoLTE track), and the SIGOS campaign.</p>
+            <p class="section-note">Readiness sketch from agreement, IR.21, and tracks — not a live node extract. IMS/CSCF follows the VoLTE track. The SIGOS column follows IR.25, or VoLTE if the lab pack is not flagged.</p>
           </div>
           <div class="segment" id="heat-switch" role="group" aria-label="Heatmap direction">
             <button type="button" data-heat="inbound" aria-pressed="true">Inbound</button>
@@ -139,6 +139,28 @@
           <ul class="legend" id="legend"></ul>
         </div>
         <p class="section-note" id="heatmap-caption"></p>
+      </section>
+
+      <section id="ir25" aria-labelledby="ir25-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Examples</p>
+            <h2 id="ir25-heading">IR.25 / S8HR test examples</h2>
+            <p class="section-note">Illustrative cases for NTT DOCOMO, Magenta Austria, and 3 UK. Structure follows GSMA IR.25 S8HR (IMS register, MO/MT, emergency 112, SMS). Results are not a live lab export.</p>
+          </div>
+        </div>
+        <div class="example-stack" id="ir25-tables"></div>
+      </section>
+
+      <section id="sigos-examples" aria-labelledby="sigos-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Examples</p>
+            <h2 id="sigos-heading">SIGOS active testing examples</h2>
+            <p class="section-note">Illustrative SIGOS-style script cards: IMS register, emergency 112, MO/MT voice, and SMS. Not screenshots of a production UI and not a parameter dump.</p>
+          </div>
+        </div>
+        <div class="sigos-grid" id="sigos-cards"></div>
       </section>
 
       <section id="timeline-section" aria-labelledby="timeline-heading">
@@ -156,13 +178,13 @@
         <div class="section-head">
           <div>
             <p class="section-kicker">Register</p>
-            <h2 id="register-heading">Partners, IR.21, and last SIGOS result</h2>
-            <p class="section-note">One row per direction. Open agreements sort to the top. Every name is marked DEMO.</p>
+            <h2 id="register-heading">Partner register</h2>
+            <p class="section-note">One row per direction. Search by name, country, or TADIG. Open agreements sort to the top.</p>
           </div>
         </div>
         <div class="filters">
           <label>Search
-            <input id="q" type="search" placeholder="Partner-EU-01" autocomplete="off">
+            <input id="q" type="search" placeholder="Swisscom, JPNDO, 3 UK" autocomplete="off">
           </label>
           <label>Direction
             <select id="direction" aria-label="Filter by direction">
@@ -185,28 +207,12 @@
             <select id="ir21" aria-label="Filter by IR.21 status">
               <option value="all">All</option>
               <option value="validated">Validated</option>
-              <option value="received">Received</option>
-              <option value="requested">Requested</option>
-              <option value="not_requested">Not requested</option>
+              <option value="in_progress">In progress</option>
+              <option value="pending">Pending</option>
             </select>
           </label>
-          <label>SIGOS
-            <select id="sigos" aria-label="Filter by SIGOS result">
-              <option value="all">All</option>
-              <option value="pass">Pass</option>
-              <option value="partial">Partial</option>
-              <option value="fail">Fail</option>
-              <option value="not_run">Not run</option>
-            </select>
-          </label>
-          <label>Tech gap
-            <select id="tech" aria-label="Filter by technology not passing">
-              <option value="all">Any</option>
-              <option value="3g">3G not passing</option>
-              <option value="lte">LTE not passing</option>
-              <option value="volte">VoLTE not passing</option>
-              <option value="ims">IMS not passing</option>
-            </select>
+          <label>Track
+            <select id="track" aria-label="Filter by track"></select>
           </label>
           <div class="filter-meta">
             <span id="row-count"></span>
@@ -215,21 +221,17 @@
         </div>
         <div class="table-wrap">
           <table class="partners">
-            <caption>Synthetic register. Example PLMNs use test MCC 001.</caption>
+            <caption>Olympics roaming partner set. Checklist column is a derived sketch, not a live extract.</caption>
             <thead id="partner-head">
               <tr>
                 <th data-sort="partner" scope="col">Partner</th>
-                <th data-sort="region" scope="col">Region</th>
+                <th data-sort="country" scope="col">Country</th>
+                <th data-sort="tadig" scope="col">TADIG</th>
                 <th data-sort="direction" scope="col">Direction</th>
                 <th data-sort="agreement" scope="col">Agreement</th>
                 <th data-sort="ir21" scope="col">IR.21</th>
-                <th scope="col">3G</th>
-                <th scope="col">LTE</th>
-                <th scope="col">VoLTE</th>
-                <th scope="col">IMS</th>
-                <th data-sort="sigos" scope="col">SIGOS</th>
-                <th data-sort="nodes" scope="col">Nodes</th>
-                <th scope="col">Example PLMN</th>
+                <th data-sort="tracks" scope="col">Tracks</th>
+                <th data-sort="nodes" scope="col">Checklist</th>
               </tr>
             </thead>
             <tbody id="partner-rows"></tbody>
