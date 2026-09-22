@@ -1,0 +1,697 @@
+{
+  "meta": {
+    "program": "Olympics 2024 Roaming Program",
+    "host_operator": "Bouygues Telecom",
+    "host_role": "Home network / program owner",
+    "author": "Elie Minassian",
+    "author_line": "Elie Minassian · Bouygues Telecom (Olympics 2024 Roaming)",
+    "contact": "minassianelie@gmail.com",
+    "github": "https://github.com/e-mination",
+    "snapshot_date": "2024-06-12",
+    "opening_ceremony": "2024-07-26",
+    "closing_ceremony": "2024-08-11",
+    "paralympic_opening": "2024-08-28",
+    "paralympic_closing": "2024-09-08",
+    "disclaimer": "Portfolio demo — fictional data, not real operator agreements or live configs",
+    "endorsement": "Personal portfolio demo inspired by program work at Bouygues Telecom. Not an official Bouygues Telecom publication or endorsement.",
+    "plmn_note": "MCC 001 is the ITU-T test MCC. Every PLMN below is an example code, not a live network.",
+    "kpi_definition": "An agreement is completed when its status is signed or live.",
+    "completed_agreement_statuses": ["signed", "live"],
+    "region_order": ["Europe", "Americas", "Asia-Pacific", "Middle East", "Africa"]
+  },
+  "node_legend": {
+    "D": "done",
+    "P": "in_progress",
+    "B": "blocked",
+    "N": "not_started"
+  },
+  "checklist": [
+    {"id": "ir21", "short": "IR.21", "name": "IR.21 exchange"},
+    {"id": "steering", "short": "Steering", "name": "Steering of roaming"},
+    {"id": "apn", "short": "APN", "name": "APN profile"},
+    {"id": "hss_udm", "short": "HSS/UDM", "name": "HSS / UDM"},
+    {"id": "dra", "short": "DRA", "name": "DRA / STP"},
+    {"id": "pgw_smf", "short": "PGW/SMF", "name": "PGW / SMF + UPF"},
+    {"id": "firewall", "short": "Firewall", "name": "Firewall / ACL"},
+    {"id": "ims_cscf", "short": "IMS", "name": "IMS / CSCF (VoLTE track)"},
+    {"id": "sigos", "short": "SIGOS", "name": "SIGOS test campaign"}
+  ],
+  "technologies": [
+    {"id": "3g", "label": "3G"},
+    {"id": "lte", "label": "LTE"},
+    {"id": "volte", "label": "VoLTE"},
+    {"id": "ims", "label": "IMS"}
+  ],
+  "tools": [
+    {
+      "id": "roamsys",
+      "name": "RoamSys",
+      "role": "Agreements and IR.21",
+      "summary": "Roaming-management platform used to follow the partner footprint, agreement stage, and GSMA RAEX / IR.21 exchange (Roaming Gateway and IREG workflows). This page is not connected to a RoamSys tenant and holds no real IR.21 files."
+    },
+    {
+      "id": "sigos",
+      "name": "SIGOS",
+      "role": "Active testing",
+      "summary": "Active test platform (SITE / GlobalRoamer family) used for probe-based roaming tests in both directions. Campaigns on this program cover 3G, LTE, VoLTE, and IMS. Pass rates and campaign IDs here are fictional."
+    }
+  ],
+  "milestones": [
+    {
+      "id": "planning",
+      "phase": "Planning",
+      "name": "Scope and partner long-list",
+      "detail": "Traffic assumptions for the Games, priority markets, inbound and outbound scope.",
+      "start": "2022-09-01",
+      "end": "2023-02-28",
+      "status": "done"
+    },
+    {
+      "id": "agreements",
+      "phase": "Agreements",
+      "name": "Roaming agreements in RoamSys",
+      "detail": "Commercial and legal waves. Inbound was opened first for visitors to the host network.",
+      "start": "2023-01-15",
+      "end": "2024-06-30",
+      "status": "in_progress"
+    },
+    {
+      "id": "ir21",
+      "phase": "IR.21",
+      "name": "IR.21 exchange and validation",
+      "detail": "Completeness tracking only. This demo does not contain RAEX documents.",
+      "start": "2023-03-01",
+      "end": "2024-06-30",
+      "status": "in_progress"
+    },
+    {
+      "id": "lab",
+      "phase": "Lab",
+      "name": "SIGOS test campaigns",
+      "detail": "Active tests for 3G, LTE, VoLTE, and IMS, inbound and outbound.",
+      "start": "2023-06-01",
+      "end": "2024-07-12",
+      "status": "in_progress"
+    },
+    {
+      "id": "config",
+      "phase": "Config",
+      "name": "Core-node roaming enablement",
+      "detail": "Steering, APN, HSS/UDM, DRA, PGW/SMF, and firewall. IMS/CSCF only where the VoLTE roaming track is in scope.",
+      "start": "2023-09-01",
+      "end": "2024-06-20",
+      "status": "in_progress"
+    },
+    {
+      "id": "freeze",
+      "phase": "Freeze",
+      "name": "Configuration freeze",
+      "detail": "Planned close of the change window before the Opening Ceremony.",
+      "start": "2024-06-21",
+      "end": "2024-07-25",
+      "status": "not_started"
+    },
+    {
+      "id": "games",
+      "phase": "Games",
+      "name": "Olympic Games",
+      "detail": "26 July – 11 August 2024, with a roaming hypercare desk in parallel.",
+      "start": "2024-07-26",
+      "end": "2024-08-11",
+      "status": "not_started"
+    },
+    {
+      "id": "paralympics",
+      "phase": "Games",
+      "name": "Paralympic Games",
+      "detail": "28 August – 8 September 2024.",
+      "start": "2024-08-28",
+      "end": "2024-09-08",
+      "status": "not_started"
+    }
+  ],
+  "progress": [
+    {"month": "2023-03", "inbound": 0, "outbound": 0},
+    {"month": "2023-04", "inbound": 6.25, "outbound": 0},
+    {"month": "2023-05", "inbound": 6.25, "outbound": 6.25},
+    {"month": "2023-06", "inbound": 12.5, "outbound": 6.25},
+    {"month": "2023-07", "inbound": 18.75, "outbound": 12.5},
+    {"month": "2023-08", "inbound": 25, "outbound": 18.75},
+    {"month": "2023-09", "inbound": 31.25, "outbound": 25},
+    {"month": "2023-10", "inbound": 43.75, "outbound": 31.25},
+    {"month": "2023-11", "inbound": 50, "outbound": 37.5},
+    {"month": "2023-12", "inbound": 56.25, "outbound": 43.75},
+    {"month": "2024-01", "inbound": 62.5, "outbound": 50},
+    {"month": "2024-02", "inbound": 68.75, "outbound": 56.25},
+    {"month": "2024-03", "inbound": 75, "outbound": 56.25},
+    {"month": "2024-04", "inbound": 75, "outbound": 62.5},
+    {"month": "2024-05", "inbound": 81.25, "outbound": 68.75},
+    {"month": "2024-06", "inbound": 81.25, "outbound": 68.75}
+  ],
+  "partners": [
+    {
+      "id": "Partner-EU-01",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-01",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 99.1},
+          "lte": {"result": "pass", "pass_rate": 98.4},
+          "volte": {"result": "pass", "pass_rate": 96.2},
+          "ims": {"result": "pass", "pass_rate": 94.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-06", "campaign": "DEMO-SIGOS-IN-24061"},
+        "nodes": "DDDDDDDDD"
+      },
+      "outbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.2},
+          "lte": {"result": "pass", "pass_rate": 96.9},
+          "volte": {"result": "pass", "pass_rate": 94.1},
+          "ims": {"result": "pass", "pass_rate": 91.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-04", "campaign": "DEMO-SIGOS-OUT-24059"},
+        "nodes": "DDDDDDDDD"
+      }
+    },
+    {
+      "id": "Partner-EU-02",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-02",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.0},
+          "lte": {"result": "pass", "pass_rate": 96.5},
+          "volte": {"result": "pass", "pass_rate": 92.4},
+          "ims": {"result": "partial", "pass_rate": 88.1}
+        },
+        "sigos": {"result": "partial", "date": "2024-06-03", "campaign": "DEMO-SIGOS-IN-24058"},
+        "nodes": "DDDDDDDPP"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 96.4},
+          "lte": {"result": "pass", "pass_rate": 94.0},
+          "volte": {"result": "partial", "pass_rate": 88.7},
+          "ims": {"result": "partial", "pass_rate": 77.0}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-29", "campaign": "DEMO-SIGOS-OUT-24050"},
+        "nodes": "DDDDDDDPP"
+      }
+    },
+    {
+      "id": "Partner-EU-03",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-03",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 97.6},
+          "lte": {"result": "pass", "pass_rate": 95.2},
+          "volte": {"result": "pass", "pass_rate": 90.1},
+          "ims": {"result": "partial", "pass_rate": 79.4}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-28", "campaign": "DEMO-SIGOS-IN-24049"},
+        "nodes": "DDDDDDDPD"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "received",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 95.8},
+          "lte": {"result": "pass", "pass_rate": 92.1},
+          "volte": {"result": "partial", "pass_rate": 80.4},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-21", "campaign": "DEMO-SIGOS-OUT-24042"},
+        "nodes": "PDDPDPPPN"
+      }
+    },
+    {
+      "id": "Partner-EU-04",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-04",
+      "inbound": {
+        "agreement_status": "negotiation",
+        "agreement_pct": 58,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 91.0},
+          "lte": {"result": "partial", "pass_rate": 84.2},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-16", "campaign": "DEMO-SIGOS-IN-24037"},
+        "nodes": "PPNPBPNNP"
+      },
+      "outbound": {
+        "agreement_status": "negotiation",
+        "agreement_pct": 42,
+        "ir21_status": "requested",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "not_run", "pass_rate": null},
+          "lte": {"result": "not_run", "pass_rate": null},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "not_run", "date": null, "campaign": null},
+        "nodes": "PNNNNNNNN"
+      }
+    },
+    {
+      "id": "Partner-EU-05",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-05",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 99.4},
+          "lte": {"result": "pass", "pass_rate": 97.8},
+          "volte": {"result": "pass", "pass_rate": 95.0},
+          "ims": {"result": "pass", "pass_rate": 91.6}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-08", "campaign": "DEMO-SIGOS-IN-24064"},
+        "nodes": "DDDDDDDDD"
+      },
+      "outbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.7},
+          "lte": {"result": "pass", "pass_rate": 97.0},
+          "volte": {"result": "pass", "pass_rate": 93.5},
+          "ims": {"result": "partial", "pass_rate": 80.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-06", "campaign": "DEMO-SIGOS-OUT-24062"},
+        "nodes": "DDDDDDDPD"
+      }
+    },
+    {
+      "id": "Partner-EU-06",
+      "demo": true,
+      "region": "Europe",
+      "example_plmn": "001-06",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 96.2},
+          "lte": {"result": "pass", "pass_rate": 93.5},
+          "volte": {"result": "partial", "pass_rate": 85.0},
+          "ims": {"result": "partial", "pass_rate": 76.4}
+        },
+        "sigos": {"result": "partial", "date": "2024-06-01", "campaign": "DEMO-SIGOS-IN-24055"},
+        "nodes": "DDDDPDDPP"
+      },
+      "outbound": {
+        "agreement_status": "legal_review",
+        "agreement_pct": 61,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "partial", "pass_rate": 88.0},
+          "lte": {"result": "partial", "pass_rate": 79.5},
+          "volte": {"result": "fail", "pass_rate": 61.0},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "fail", "date": "2024-05-14", "campaign": "DEMO-SIGOS-OUT-24036"},
+        "nodes": "PPPPNNBNP"
+      }
+    },
+    {
+      "id": "Partner-AM-01",
+      "demo": true,
+      "region": "Americas",
+      "example_plmn": "001-07",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.8},
+          "lte": {"result": "pass", "pass_rate": 97.1},
+          "volte": {"result": "pass", "pass_rate": 93.3},
+          "ims": {"result": "pass", "pass_rate": 90.2}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-05", "campaign": "DEMO-SIGOS-IN-24060"},
+        "nodes": "DDDDDDDDD"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 97.5},
+          "lte": {"result": "pass", "pass_rate": 95.6},
+          "volte": {"result": "pass", "pass_rate": 91.8},
+          "ims": {"result": "partial", "pass_rate": 78.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-01", "campaign": "DEMO-SIGOS-OUT-24054"},
+        "nodes": "DDDDDDDPD"
+      }
+    },
+    {
+      "id": "Partner-AM-02",
+      "demo": true,
+      "region": "Americas",
+      "example_plmn": "001-08",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 97.2},
+          "lte": {"result": "pass", "pass_rate": 94.6},
+          "volte": {"result": "partial", "pass_rate": 89.0},
+          "ims": {"result": "partial", "pass_rate": 82.5}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-30", "campaign": "DEMO-SIGOS-IN-24051"},
+        "nodes": "DDDDDDPPD"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "received",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 94.8},
+          "lte": {"result": "pass", "pass_rate": 91.3},
+          "volte": {"result": "partial", "pass_rate": 76.2},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-24", "campaign": "DEMO-SIGOS-OUT-24046"},
+        "nodes": "PDDDPDPPN"
+      }
+    },
+    {
+      "id": "Partner-AM-03",
+      "demo": true,
+      "region": "Americas",
+      "example_plmn": "001-09",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 95.4},
+          "lte": {"result": "pass", "pass_rate": 92.8},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "pass", "date": "2024-05-22", "campaign": "DEMO-SIGOS-IN-24044"},
+        "nodes": "DDDDDDDND"
+      },
+      "outbound": {
+        "agreement_status": "negotiation",
+        "agreement_pct": 46,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "partial", "pass_rate": 86.4},
+          "lte": {"result": "not_run", "pass_rate": null},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-11", "campaign": "DEMO-SIGOS-OUT-24034"},
+        "nodes": "PPNPNNNNP"
+      }
+    },
+    {
+      "id": "Partner-AP-01",
+      "demo": true,
+      "region": "Asia-Pacific",
+      "example_plmn": "001-10",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 99.0},
+          "lte": {"result": "pass", "pass_rate": 98.2},
+          "volte": {"result": "pass", "pass_rate": 94.7},
+          "ims": {"result": "pass", "pass_rate": 92.8}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-09", "campaign": "DEMO-SIGOS-IN-24066"},
+        "nodes": "DDDDDDDDD"
+      },
+      "outbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.1},
+          "lte": {"result": "pass", "pass_rate": 96.4},
+          "volte": {"result": "pass", "pass_rate": 92.7},
+          "ims": {"result": "partial", "pass_rate": 81.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-08", "campaign": "DEMO-SIGOS-OUT-24065"},
+        "nodes": "DDDDDDDPD"
+      }
+    },
+    {
+      "id": "Partner-AP-02",
+      "demo": true,
+      "region": "Asia-Pacific",
+      "example_plmn": "001-11",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 97.9},
+          "lte": {"result": "pass", "pass_rate": 96.0},
+          "volte": {"result": "pass", "pass_rate": 91.2},
+          "ims": {"result": "partial", "pass_rate": 87.6}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-02", "campaign": "DEMO-SIGOS-IN-24056"},
+        "nodes": "DDDDDDDPD"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 96.0},
+          "lte": {"result": "pass", "pass_rate": 93.8},
+          "volte": {"result": "partial", "pass_rate": 87.5},
+          "ims": {"result": "fail", "pass_rate": 71.0}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-31", "campaign": "DEMO-SIGOS-OUT-24052"},
+        "nodes": "DDDDDDDPP"
+      }
+    },
+    {
+      "id": "Partner-AP-03",
+      "demo": true,
+      "region": "Asia-Pacific",
+      "example_plmn": "001-12",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 94.1},
+          "lte": {"result": "pass", "pass_rate": 90.4},
+          "volte": {"result": "partial", "pass_rate": 78.8},
+          "ims": {"result": "fail", "pass_rate": 68.0}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-20", "campaign": "DEMO-SIGOS-IN-24041"},
+        "nodes": "DDDPPDPPP"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 90.2},
+          "lte": {"result": "partial", "pass_rate": 84.6},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-17", "campaign": "DEMO-SIGOS-OUT-24038"},
+        "nodes": "PDDDPDPNP"
+      }
+    },
+    {
+      "id": "Partner-AP-04",
+      "demo": true,
+      "region": "Asia-Pacific",
+      "example_plmn": "001-13",
+      "inbound": {
+        "agreement_status": "legal_review",
+        "agreement_pct": 68,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "not_run", "pass_rate": null},
+          "lte": {"result": "not_run", "pass_rate": null},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "not_run", "date": null, "campaign": null},
+        "nodes": "PPPNNNNNN"
+      },
+      "outbound": {
+        "agreement_status": "not_started",
+        "agreement_pct": 10,
+        "ir21_status": "not_requested",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "not_run", "pass_rate": null},
+          "lte": {"result": "not_run", "pass_rate": null},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "not_run", "date": null, "campaign": null},
+        "nodes": "NNNNNNNNN"
+      }
+    },
+    {
+      "id": "Partner-ME-01",
+      "demo": true,
+      "region": "Middle East",
+      "example_plmn": "001-14",
+      "inbound": {
+        "agreement_status": "live",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 98.5},
+          "lte": {"result": "pass", "pass_rate": 96.7},
+          "volte": {"result": "pass", "pass_rate": 93.8},
+          "ims": {"result": "pass", "pass_rate": 90.9}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-07", "campaign": "DEMO-SIGOS-IN-24063"},
+        "nodes": "DDDDDDDDD"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "validated",
+        "volte_roaming": true,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 97.0},
+          "lte": {"result": "pass", "pass_rate": 94.4},
+          "volte": {"result": "pass", "pass_rate": 90.6},
+          "ims": {"result": "partial", "pass_rate": 81.0}
+        },
+        "sigos": {"result": "pass", "date": "2024-06-03", "campaign": "DEMO-SIGOS-OUT-24057"},
+        "nodes": "DDDDDDDPD"
+      }
+    },
+    {
+      "id": "Partner-AF-01",
+      "demo": true,
+      "region": "Africa",
+      "example_plmn": "001-15",
+      "inbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 93.6},
+          "lte": {"result": "partial", "pass_rate": 89.2},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-18", "campaign": "DEMO-SIGOS-IN-24039"},
+        "nodes": "PDDDDDPNP"
+      },
+      "outbound": {
+        "agreement_status": "signed",
+        "agreement_pct": 100,
+        "ir21_status": "received",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "pass", "pass_rate": 91.5},
+          "lte": {"result": "partial", "pass_rate": 85.7},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "partial", "date": "2024-05-19", "campaign": "DEMO-SIGOS-OUT-24040"},
+        "nodes": "PDDDPDPNP"
+      }
+    },
+    {
+      "id": "Partner-AF-02",
+      "demo": true,
+      "region": "Africa",
+      "example_plmn": "001-16",
+      "inbound": {
+        "agreement_status": "negotiation",
+        "agreement_pct": 36,
+        "ir21_status": "requested",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "fail", "pass_rate": 74.0},
+          "lte": {"result": "fail", "pass_rate": 66.5},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "fail", "date": "2024-05-09", "campaign": "DEMO-SIGOS-IN-24033"},
+        "nodes": "PBPNNNPNP"
+      },
+      "outbound": {
+        "agreement_status": "not_started",
+        "agreement_pct": 8,
+        "ir21_status": "not_requested",
+        "volte_roaming": false,
+        "tests": {
+          "3g": {"result": "not_run", "pass_rate": null},
+          "lte": {"result": "not_run", "pass_rate": null},
+          "volte": {"result": "not_run", "pass_rate": null},
+          "ims": {"result": "not_run", "pass_rate": null}
+        },
+        "sigos": {"result": "not_run", "date": null, "campaign": null},
+        "nodes": "NNNNNNNNN"
+      }
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Olympics 2024 Roaming Program · Portfolio demo</title>
+  <meta name="description" content="Portfolio demo of inbound and outbound roaming readiness for the Paris 2024 Games. Fictional partners and figures, inspired by program work at Bouygues Telecom.">
+  <meta name="author" content="Elie Minassian">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>
+    (function () {
+      try {
+        var query = new URLSearchParams(location.search).get("theme");
+        var stored = localStorage.getItem("roaming-demo-theme");
+        var theme = query === "light" || query === "dark" ? query : stored;
+        if (theme !== "light" && theme !== "dark") {
+          theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (err) {
+        document.documentElement.setAttribute("data-theme", "light");
+      }
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#content">Skip to content</a>
+  <div class="banner" role="note">
+    <div class="wrap banner-inner">
+      <strong>Portfolio demo — fictional data, not real operator agreements or live configs.</strong>
+      <span>Inspired by inbound and outbound roaming work at Bouygues Telecom for the Paris 2024 Games. Not an official Bouygues Telecom publication. Partners, PLMNs, IR.21 states, and test results are synthetic.</span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <header class="site-header">
+      <div class="header-top">
+        <p class="kicker">Bouygues Telecom · Home network · Portfolio demo</p>
+        <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+      </div>
+      <h1>Olympics 2024 Roaming Program</h1>
+      <p class="lede">Inbound and outbound roaming agreements, IR.21 completeness, and core-node enablement for the Paris Games. VoLTE and IMS sit under roaming as test tracks.</p>
+      <div class="header-row">
+        <dl class="facts" id="facts">
+          <div><dt>Snapshot</dt><dd>Loading…</dd></div>
+        </dl>
+        <div class="view-label">View
+          <div class="segment" id="direction-switch" role="group" aria-label="Roaming direction">
+            <button type="button" data-direction="all" aria-pressed="true">All</button>
+            <button type="button" data-direction="inbound">Inbound</button>
+            <button type="button" data-direction="outbound">Outbound</button>
+          </div>
+        </div>
+      </div>
+      <p class="definition" id="definition"></p>
+    </header>
+
+    <main id="content">
+      <p id="error" class="error" hidden></p>
+      <noscript>
+        <p class="noscript">JavaScript is required to load figures from <code>data/program.json</code>.</p>
+      </noscript>
+
+      <section aria-labelledby="kpi-heading">
+        <h2 id="kpi-heading" class="section-kicker">Main KPI · agreements completed</h2>
+        <div class="kpis" id="kpis"></div>
+      </section>
+
+      <section id="attention" class="attention" hidden></section>
+
+      <section id="trend">
+        <div class="chart-grid">
+          <article class="card">
+            <h2>Inbound vs outbound</h2>
+            <p class="section-note">Agreements are the headline. IR.21, the latest SIGOS pass, and checklist completion show whether the signature is actually ready.</p>
+            <div class="chart-box" role="img" aria-label="Grouped bars comparing inbound and outbound completion">
+              <canvas id="chart-compare"></canvas>
+            </div>
+          </article>
+          <article class="card">
+            <h2>Agreement progress toward the Games</h2>
+            <p class="section-note">Share of partners with a signed or live agreement, by month, through the 12 June 2024 snapshot. No forecast after that date.</p>
+            <div class="chart-box" role="img" aria-label="Line chart of inbound and outbound agreement completion over time">
+              <canvas id="chart-trend"></canvas>
+            </div>
+          </article>
+        </div>
+        <p id="chart-fallback" class="error" hidden>Charts need Chart.js from the CDN. The partner register and heatmap below still load from the local JSON.</p>
+      </section>
+
+      <section id="tests">
+        <div class="chart-grid">
+          <article class="card">
+            <h2>Test pass rate by technology</h2>
+            <p class="section-note">Mean pass rate where a SIGOS result exists. 3G, LTE, VoLTE, and IMS are roaming test domains. Not run is left out of the average.</p>
+            <div class="chart-box" role="img" aria-label="Pass rates for 3G, LTE, VoLTE, and IMS">
+              <canvas id="chart-tech"></canvas>
+            </div>
+          </article>
+          <article class="card">
+            <h2 id="node-chart-title">Checklist completion</h2>
+            <p class="section-note" id="node-chart-note">Roaming enablement on the core, not a live configuration extract.</p>
+            <div class="chart-box nodes" role="img" aria-label="Node checklist completion">
+              <canvas id="chart-nodes"></canvas>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="regions-section" aria-labelledby="region-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Regions</p>
+            <h2 id="region-heading">Agreements by region</h2>
+            <p class="section-note">Same completion rule: signed or live. Partner names stay anonymous.</p>
+          </div>
+        </div>
+        <div class="card regions" id="regions"></div>
+      </section>
+
+      <section id="nodes" aria-labelledby="heatmap-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Nodes</p>
+            <h2 id="heatmap-heading">Roaming enablement by partner</h2>
+            <p class="section-note">IR.21, steering, APN, HSS/UDM, DRA/STP, PGW/SMF, firewall, IMS/CSCF (the VoLTE track), and the SIGOS campaign.</p>
+          </div>
+          <div class="segment" id="heat-switch" role="group" aria-label="Heatmap direction">
+            <button type="button" data-heat="inbound" aria-pressed="true">Inbound</button>
+            <button type="button" data-heat="outbound">Outbound</button>
+          </div>
+        </div>
+        <div class="card heatmap-card">
+          <div id="heatmap"></div>
+          <ul class="legend" id="legend"></ul>
+        </div>
+        <p class="section-note" id="heatmap-caption"></p>
+      </section>
+
+      <section id="timeline-section" aria-labelledby="timeline-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Milestones</p>
+            <h2 id="timeline-heading">From planning to the Games</h2>
+          </div>
+        </div>
+        <p class="timeline-now" id="timeline-now"></p>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
+
+      <section id="register" aria-labelledby="register-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Register</p>
+            <h2 id="register-heading">Partners, IR.21, and last SIGOS result</h2>
+            <p class="section-note">One row per direction. Open agreements sort to the top. Every name is marked DEMO.</p>
+          </div>
+        </div>
+        <div class="filters">
+          <label>Search
+            <input id="q" type="search" placeholder="Partner-EU-01" autocomplete="off">
+          </label>
+          <label>Direction
+            <select id="direction" aria-label="Filter by direction">
+              <option value="all">All</option>
+              <option value="inbound">Inbound</option>
+              <option value="outbound">Outbound</option>
+            </select>
+          </label>
+          <label>Region
+            <select id="region" aria-label="Filter by region"></select>
+          </label>
+          <label>Agreement
+            <select id="agreement" aria-label="Filter by agreement">
+              <option value="all">All</option>
+              <option value="completed">Completed</option>
+              <option value="open">Open</option>
+            </select>
+          </label>
+          <label>IR.21
+            <select id="ir21" aria-label="Filter by IR.21 status">
+              <option value="all">All</option>
+              <option value="validated">Validated</option>
+              <option value="received">Received</option>
+              <option value="requested">Requested</option>
+              <option value="not_requested">Not requested</option>
+            </select>
+          </label>
+          <label>SIGOS
+            <select id="sigos" aria-label="Filter by SIGOS result">
+              <option value="all">All</option>
+              <option value="pass">Pass</option>
+              <option value="partial">Partial</option>
+              <option value="fail">Fail</option>
+              <option value="not_run">Not run</option>
+            </select>
+          </label>
+          <label>Tech gap
+            <select id="tech" aria-label="Filter by technology not passing">
+              <option value="all">Any</option>
+              <option value="3g">3G not passing</option>
+              <option value="lte">LTE not passing</option>
+              <option value="volte">VoLTE not passing</option>
+              <option value="ims">IMS not passing</option>
+            </select>
+          </label>
+          <div class="filter-meta">
+            <span id="row-count"></span>
+            <button id="clear-filters" class="clear-btn" type="button">Clear</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="partners">
+            <caption>Synthetic register. Example PLMNs use test MCC 001.</caption>
+            <thead id="partner-head">
+              <tr>
+                <th data-sort="partner" scope="col">Partner</th>
+                <th data-sort="region" scope="col">Region</th>
+                <th data-sort="direction" scope="col">Direction</th>
+                <th data-sort="agreement" scope="col">Agreement</th>
+                <th data-sort="ir21" scope="col">IR.21</th>
+                <th scope="col">3G</th>
+                <th scope="col">LTE</th>
+                <th scope="col">VoLTE</th>
+                <th scope="col">IMS</th>
+                <th data-sort="sigos" scope="col">SIGOS</th>
+                <th data-sort="nodes" scope="col">Nodes</th>
+                <th scope="col">Example PLMN</th>
+              </tr>
+            </thead>
+            <tbody id="partner-rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="tooling" aria-labelledby="tooling-heading">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Tooling</p>
+            <h2 id="tooling-heading">RoamSys and SIGOS</h2>
+            <p class="section-note">The working tools on the program. This dashboard does not log into either of them.</p>
+          </div>
+        </div>
+        <div class="tool-grid" id="tools"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>Elie Minassian · Bouygues Telecom (Olympics 2024 Roaming) · <a href="mailto:minassianelie@gmail.com">minassianelie@gmail.com</a></p>
+      <p>Personal portfolio demo. Not an official Bouygues Telecom publication or endorsement. No trademarked logo is used.</p>
+      <p>Portfolio demo — fictional data, not real operator agreements or live configs. Source: <a href="data/program.json">data/program.json</a>.</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" defer></script>
+  <script src="js/dashboard.js" defer></script>
+</body>
+</html>
