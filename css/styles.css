@@ -757,19 +757,6 @@ table.partners {
   font-weight: 600;
 }
 
-.demo-tag {
-  display: inline-block;
-  margin-left: 6px;
-  padding: 1px 5px;
-  border-radius: 4px;
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.04em;
-  vertical-align: 1px;
-}
-
 .pill {
   display: inline-block;
   padding: 2px 7px;

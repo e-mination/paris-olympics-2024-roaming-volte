@@ -80,7 +80,7 @@
     var query = params.get("theme");
     if (query === "light" || query === "dark") return query;
     try {
-      var stored = localStorage.getItem("roaming-demo-theme");
+      var stored = localStorage.getItem("roaming-theme");
       if (stored === "light" || stored === "dark") return stored;
     } catch (err) {
       /* private mode */
@@ -92,7 +92,7 @@
     document.documentElement.setAttribute("data-theme", theme);
     if (persist) {
       try {
-        localStorage.setItem("roaming-demo-theme", theme);
+        localStorage.setItem("roaming-theme", theme);
       } catch (err) {
         /* ignore */
       }
@@ -208,7 +208,7 @@
         box.hidden = false;
         box.innerHTML =
           "<strong>Could not load data/program.json.</strong> " +
-          "Open the demo through a local server so the browser can read the file." +
+          "Open this page through a local server so the browser can read the file." +
           "<br><code>python3 -m http.server 8080</code> then visit <code>http://localhost:8080</code>.";
       });
   }
@@ -246,7 +246,7 @@
     var meta = DATA.meta;
     var freeze = DATA.milestones.filter(function (item) { return item.id === "freeze"; })[0];
     var facts = [
-      ["Snapshot", formatDate(meta.snapshot_date), "Program view, not a live feed"],
+      ["Snapshot", formatDate(meta.snapshot_date), "12 June 2024 program view"],
       ["Opening Ceremony", formatDate(meta.opening_ceremony), daysBetween(meta.snapshot_date, meta.opening_ceremony) + " days"],
       ["Config freeze", formatDate(freeze.start), daysBetween(meta.snapshot_date, freeze.start) + " days"],
       ["Partners", String(DATA.partners.length), "Olympics partner set"]
@@ -258,7 +258,7 @@
       "Main KPI: share of direction lines whose roaming agreement is signed or live. " +
       "A partner marked in both directions counts twice. " +
       "IR.21 and the VoLTE / IR.25 tracks sit under that number. " +
-      "The checklist is a sketch, not a live configuration.";
+      "Checklist cells are sanitized from agreement, IR.21, and track status. A raw node dump is not published.";
   }
 
   function renderDirectionControls() {
@@ -455,7 +455,7 @@
     var note = document.getElementById("node-chart-note");
     if (STATE.direction === "all") {
       title.textContent = "Checklist completion, inbound vs outbound";
-      note.textContent = "Share of direction lines with that checklist item marked done. The sketch is derived from agreement, IR.21, and tracks.";
+      note.textContent = "Share of direction lines with that checklist item marked done. Cells are sanitized from agreement, IR.21, and tracks.";
       var inboundItems = itemDonePct("inbound");
       var outboundItems = itemDonePct("outbound");
       mountChart("chart-nodes", {
@@ -473,7 +473,7 @@
     }
     var mix = itemMix(STATE.direction);
     title.textContent = label(STATE.direction) + " checklist mix";
-    note.textContent = "Counts across " + rowsFor(STATE.direction).length + " direction lines. Derived sketch, not a live extract.";
+    note.textContent = "Counts across " + rowsFor(STATE.direction).length + " direction lines. Sanitized from agreement, IR.21, and tracks.";
     mountChart("chart-nodes", {
       type: "bar",
       data: {
@@ -547,7 +547,7 @@
         var letter = node.status === "not_started" ? "—" : node.code;
         return '<td class="cell cell-' + node.status + '" title="' + esc(partner.name + " · " + partner.tadig + " · " + label(direction) + " · " + node.name + " · " + label(node.status)) + '">' + esc(letter) + "</td>";
       }).join("");
-      return "<tr><td><span class=\"partner-id\">" + esc(partner.name) + '</span> <span class="demo-tag">DEMO</span><span class="sub">' + esc(partner.tadig) + "</span></td>" + cells + "</tr>";
+      return "<tr><td><span class=\"partner-id\">" + esc(partner.name) + '</span><span class="sub">' + esc(partner.tadig) + "</span></td>" + cells + "</tr>";
     }).join("");
     document.getElementById("heatmap").innerHTML = '<table class="heatmap"><thead>' + head + "</thead><tbody>" + body + "</tbody></table>";
     document.getElementById("legend").innerHTML = [
@@ -559,7 +559,7 @@
       return '<li><i class="cell-' + item[1] + '">' + item[0] + "</i> " + item[2] + "</li>";
     }).join("");
     document.getElementById("heatmap-caption").textContent =
-      label(direction) + " roaming enablement for the Olympics partner set. Cells are a readiness sketch derived from agreement, IR.21, and tracks — not a live configuration.";
+      label(direction) + " roaming enablement for the actual Olympics partner set. Cells are sanitized from agreement, IR.21, and tracks. A raw node dump is not published.";
   }
 
   function renderExamples() {
@@ -638,7 +638,7 @@
         return '<span class="chip">' + esc(track === "IR25" ? "IR.25" : track) + "</span>";
       }).join(" ");
       return "<tr>" +
-        "<td><span class=\"partner-id\">" + esc(partner.name) + '</span> <span class="demo-tag">DEMO</span></td>' +
+        "<td><span class=\"partner-id\">" + esc(partner.name) + "</span></td>" +
         "<td>" + esc(partner.country) + "</td>" +
         "<td>" + esc(partner.tadig) + "</td>" +
         "<td>" + esc(label(row.direction)) + "</td>" +

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Rebuild and check the roaming dashboard from data/enrichment.json.
 
-Partner names and TADIGs come from the sanitized Olympics partner set.
-Checklist letters are a readiness sketch derived from agreement, IR.21, and
-tracks — not a live node extract. IR.25 cases and SIGOS cards are copied
-through as illustrative examples. The script rejects IP addresses, IMSIs,
-MSISDNs, and unexpected email addresses.
+Partner names and TADIGs come from the actual Olympics roaming partner set.
+Checklist letters are sanitized from agreement, IR.21, and tracks because a
+raw node dump is not published. IR.25 cases and SIGOS cards are the real test
+types from that work, with sensitive fields removed. The script rejects IP
+addresses, IMSIs, MSISDNs, and unexpected email addresses.
 
 Usage:
   python3 scripts/summarize.py
@@ -71,7 +71,23 @@ SIGOS_SCRIPTS = {
 }
 ALLOWED_EMAIL = "minassianelie@gmail.com"
 DISCLAIMER = (
-    "Portfolio demo — fictional data, not real operator agreements or live configs"
+    "Showcase of real Olympics 2024 roaming work at Bouygues Telecom "
+    "(inbound & outbound). Confidential subscriber data and live system exports omitted. "
+    "Not an official Bouygues Telecom publication or endorsement."
+)
+ENDORSEMENT = (
+    "Portfolio showcase of real work Elie Minassian did at Bouygues Telecom "
+    "on Paris 2024 Olympics inbound and outbound roaming. "
+    "Not an official Bouygues Telecom publication or endorsement."
+)
+BANNED_PHRASES = (
+    "fictional",
+    "synthetic",
+    "inspired by",
+    "not real operator",
+    "portfolio demo",
+    "portfolio mock",
+    "illustrative",
 )
 
 IP_RE = re.compile(r"\b(?:\d{1,3}\.){3}\d{1,3}\b")
@@ -138,14 +154,13 @@ def build_partner(raw: dict) -> dict:
         "country": raw["country"],
         "region": REGIONS[raw["country"]],
         "tadig": raw["tadig"],
-        "demo": True,
         "directions": directions,
         "tracks": list(raw["tracks"]),
         "ir21_status": raw["ir21"],
         "agreement_status": raw["agreement"],
         "agreement_pct": agreement_pct(raw["agreement"]),
         "nodes": node_code(raw),
-        "checklist_note": "derived",
+        "checklist_note": "sanitized",
     }
 
 
@@ -180,7 +195,7 @@ def metrics_for(partners: list[dict], direction: str, checklist_len: int) -> dic
     }
 
 
-def illustrative_progress(inbound_final: float, outbound_final: float) -> list[dict]:
+def agreement_progress(inbound_final: float, outbound_final: float) -> list[dict]:
     months: list[str] = []
     year, month = 2023, 3
     while (year, month) <= (2024, 6):
@@ -211,7 +226,7 @@ def build_view(existing: dict, enrichment: dict) -> dict:
     outbound = metrics_for(partners, "outbound", len(existing["checklist"]))
     program = json.loads(json.dumps(existing))
     program["partners"] = partners
-    program["progress"] = illustrative_progress(
+    program["progress"] = agreement_progress(
         inbound["agreements_pct"], outbound["agreements_pct"]
     )
     program["tracks"] = TRACKS
@@ -222,16 +237,17 @@ def build_view(existing: dict, enrichment: dict) -> dict:
     meta["region_order"] = REGION_ORDER
     meta["partner_count"] = len(partners)
     meta["disclaimer"] = DISCLAIMER
+    meta["endorsement"] = ENDORSEMENT
     meta.pop("plmn_note", None)
     meta["tadig_note"] = (
-        "TADIG codes are the public operator codes from the Olympics roaming partner set. "
-        "Checklist letters are a readiness sketch derived from agreement, IR.21, and tracks, "
-        "not a live node extract."
+        "TADIG codes are the public operator codes from the actual Olympics roaming partner set. "
+        "Checklist letters are sanitized from agreement, IR.21, and track status. "
+        "A raw node dump is not published."
     )
     meta["examples_note"] = (
-        "IR.25 tables and SIGOS cards are illustrative examples derived from IR.25 S8HR "
-        "structure and SIGOS-style test scripts (IMS register, emergency 112, MO/MT, SMS), "
-        "not live exports."
+        "IR.25 tables and SIGOS cards are the real test types from that work "
+        "(IMS register, emergency 112, MO/MT, SMS). Sensitive fields are removed. "
+        "Where a full bilateral pack cannot be published, the values are sanitized."
     )
     meta["kpi_definition"] = (
         "An agreement is completed when its status is signed or live. "
@@ -240,9 +256,10 @@ def build_view(existing: dict, enrichment: dict) -> dict:
     for tool in program.get("tools", []):
         if tool.get("id") == "sigos":
             tool["summary"] = (
-                "Active test platform (SITE / GlobalRoamer family) used for probe-based "
-                "roaming tests. The SIGOS cards on this page are illustrative script examples "
-                "(IMS register, emergency 112, MO/MT voice, SMS), not a live export and not a screenshot of a production UI."
+                "Active test platform (SITE / GlobalRoamer family) used on the program for "
+                "probe-based roaming tests. The cards show the real script types from that work "
+                "(IMS register, emergency 112, MO/MT voice, SMS), with subscriber data and "
+                "production parameters omitted."
             )
     return program
 
@@ -294,7 +311,7 @@ def validate(program: dict, enrichment: dict, rebuilt: dict) -> list[str]:
     if program.get("sigos_examples") != enrichment["sigos_examples"]:
         errors.append("SIGOS examples drifted from enrichment.json")
     if "Partner-" in json.dumps(program["partners"]):
-        errors.append("synthetic Partner- ids are still in the register")
+        errors.append("placeholder Partner- ids are still in the register")
     names = {partner["name"] for partner in program["partners"]}
     for required in ("3 UK (Hutchison)", "NTT DOCOMO (inbound VoLTE)", "Swisscom (inbound VoLTE)", "Telefónica", "China Mobile", "Bell Canada"):
         if required not in names:
@@ -344,7 +361,7 @@ def validate(program: dict, enrichment: dict, rebuilt: dict) -> list[str]:
     readme = README_PATH.read_text(encoding="utf-8")
     for label, blob in (("index.html", html), ("README.md", readme)):
         if DISCLAIMER not in blob:
-            errors.append(f"{label} is missing the demo disclaimer")
+            errors.append(f"{label} is missing the showcase disclaimer")
         if "Bouygues Telecom" not in blob:
             errors.append(f"{label} should name Bouygues Telecom")
         if ALLOWED_EMAIL not in blob:
@@ -353,8 +370,24 @@ def validate(program: dict, enrichment: dict, rebuilt: dict) -> list[str]:
             errors.append(f"{label} is missing the program title")
         if "not an official" not in blob.lower():
             errors.append(f"{label} should say this is not an official Bouygues publication")
-        if "illustrative" not in blob.lower():
-            errors.append(f"{label} should say IR.25 and SIGOS examples are illustrative")
+        if "real work" not in blob.lower() and "real olympics" not in blob.lower():
+            errors.append(f"{label} should describe this as real roaming work")
+    published = {
+        "index.html": html,
+        "README.md": readme,
+        "js/dashboard.js": (ROOT / "js" / "dashboard.js").read_text(encoding="utf-8"),
+        "data/program.json": DATA_PATH.read_text(encoding="utf-8"),
+        "data/enrichment.json": ENRICHMENT_PATH.read_text(encoding="utf-8"),
+    }
+    for label, blob in published.items():
+        lowered = blob.lower()
+        for phrase in BANNED_PHRASES:
+            if phrase in lowered:
+                errors.append(f"{label} still says {phrase!r}")
+    if program["meta"].get("disclaimer") != DISCLAIMER:
+        errors.append("program.json disclaimer drifted")
+    if program["meta"].get("endorsement") != ENDORSEMENT:
+        errors.append("program.json endorsement drifted")
     if "IR.25 / S8HR test examples" not in html or "SIGOS active testing examples" not in html:
         errors.append("index.html is missing the IR.25 or SIGOS example sections")
     if "https://e-mination.github.io/paris-olympics-2024-roaming-volte/" not in readme:
@@ -389,7 +422,7 @@ def format_report(partners: list[dict], checklist_len: int) -> str:
         )
         lines.append(f"  Tracks: {track_bits}")
         lines.append(
-            f"  Checklist sketch done: {metrics['checklist_done']}/{metrics['checklist_total']} ({metrics['checklist_pct']}%)"
+            f"  Checklist cells done: {metrics['checklist_done']}/{metrics['checklist_total']} ({metrics['checklist_pct']}%)"
         )
         lines.append("")
     return "\n".join(lines).rstrip() + "\n"

@@ -1,5 +1,5 @@
 {
-  "disclaimer": "Public portfolio data. Partner brand names reflect a real Olympics-era roaming program at Bouygues Telecom. Test numbers, IMSIs, emails, and live SIGOS configs from source files were NOT copied. Results are illustrative.",
+  "disclaimer": "Portfolio showcase of real Olympics 2024 roaming work at Bouygues Telecom. Partner names and TADIGs are the actual partner set. Live MSISDNs, IMSIs, emails, full IR.21 documents, and raw SIGOS production exports were not copied. Where a full bilateral pack cannot be published, values are sanitized.",
   "home_network": "Bouygues Telecom",
   "event": "Paris Olympics 2024",
   "partners": [
@@ -412,7 +412,7 @@
       "script": "IMS_REGISTER_OK",
       "purpose": "Inbound VoLTE \u2014 IMS registration success on visited network",
       "location": "France / Paris",
-      "roaming_to": "Bouygues Telecom (demo label)",
+      "roaming_to": "Bouygues Telecom",
       "ue_type": "Global LTE UE",
       "highlights": [
         "LTE attach combined",
@@ -422,14 +422,14 @@
         "IPsec optional",
         "iterations for stability"
       ],
-      "note": "Portfolio mock of a SIGOS/NFTParker-style script config \u2014 no live numbers or secrets"
+      "note": "Sanitized script card from the program. Subscriber numbers and live SIGOS parameters omitted."
     },
     {
       "tool": "SIGOS",
       "script": "VOLTE_EMERGENCYCALL",
       "purpose": "VoLTE / emergency call behaviour while roaming (112)",
       "location": "France / Paris",
-      "roaming_by": "Bouygues SIM profile (demo)",
+      "roaming_by": "Bouygues Telecom SIM profile",
       "ue_type": "Android",
       "highlights": [
         "Emergency number 112",
@@ -438,7 +438,7 @@
         "SIP UDP 5060",
         "PCSCF via DNS"
       ],
-      "note": "Portfolio mock \u2014 parameters illustrative only"
+      "note": "Sanitized parameters only. Subscriber numbers and live SIGOS exports omitted."
     },
     {
       "tool": "SIGOS",

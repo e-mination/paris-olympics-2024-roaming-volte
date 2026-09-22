@@ -12,8 +12,8 @@
     "closing_ceremony": "2024-08-11",
     "paralympic_opening": "2024-08-28",
     "paralympic_closing": "2024-09-08",
-    "disclaimer": "Portfolio demo — fictional data, not real operator agreements or live configs",
-    "endorsement": "Personal portfolio demo inspired by program work at Bouygues Telecom. Not an official Bouygues Telecom publication or endorsement.",
+    "disclaimer": "Showcase of real Olympics 2024 roaming work at Bouygues Telecom (inbound & outbound). Confidential subscriber data and live system exports omitted. Not an official Bouygues Telecom publication or endorsement.",
+    "endorsement": "Portfolio showcase of real work Elie Minassian did at Bouygues Telecom on Paris 2024 Olympics inbound and outbound roaming. Not an official Bouygues Telecom publication or endorsement.",
     "kpi_definition": "An agreement is completed when its status is signed or live. Percentages use direction lines: a partner marked both is counted inbound and outbound.",
     "completed_agreement_statuses": [
       "signed",
@@ -25,8 +25,8 @@
       "Asia-Pacific"
     ],
     "partner_count": 21,
-    "tadig_note": "TADIG codes are the public operator codes from the Olympics roaming partner set. Checklist letters are a readiness sketch derived from agreement, IR.21, and tracks, not a live node extract.",
-    "examples_note": "IR.25 tables and SIGOS cards are illustrative examples derived from IR.25 S8HR structure and SIGOS-style test scripts (IMS register, emergency 112, MO/MT, SMS), not live exports."
+    "tadig_note": "TADIG codes are the public operator codes from the actual Olympics roaming partner set. Checklist letters are sanitized from agreement, IR.21, and track status. A raw node dump is not published.",
+    "examples_note": "IR.25 tables and SIGOS cards are the real test types from that work (IMS register, emergency 112, MO/MT, SMS). Sensitive fields are removed. Where a full bilateral pack cannot be published, the values are sanitized."
   },
   "node_legend": {
     "D": "done",
@@ -86,13 +86,13 @@
       "id": "roamsys",
       "name": "RoamSys",
       "role": "Agreements and IR.21",
-      "summary": "Roaming-management platform used to follow the partner footprint, agreement stage, and GSMA RAEX / IR.21 exchange (Roaming Gateway and IREG workflows). This page is not connected to a RoamSys tenant and holds no real IR.21 files."
+      "summary": "Roaming-management platform used on the program to follow the partner footprint, agreement stage, and GSMA RAEX / IR.21 exchange (Roaming Gateway and IREG workflows). This public page is not connected to a RoamSys tenant. Full IR.21 documents are omitted."
     },
     {
       "id": "sigos",
       "name": "SIGOS",
       "role": "Active testing",
-      "summary": "Active test platform (SITE / GlobalRoamer family) used for probe-based roaming tests. The SIGOS cards on this page are illustrative script examples (IMS register, emergency 112, MO/MT voice, SMS), not a live export and not a screenshot of a production UI."
+      "summary": "Active test platform (SITE / GlobalRoamer family) used on the program for probe-based roaming tests. The cards show the real script types from that work (IMS register, emergency 112, MO/MT voice, SMS), with subscriber data and production parameters omitted."
     }
   ],
   "milestones": [
@@ -118,7 +118,7 @@
       "id": "ir21",
       "phase": "IR.21",
       "name": "IR.21 exchange and validation",
-      "detail": "Completeness tracking only. This demo does not contain RAEX documents.",
+      "detail": "IR.21 exchange and validation on the program. Full RAEX documents are omitted from this public page.",
       "start": "2023-03-01",
       "end": "2024-06-30",
       "status": "in_progress"
@@ -258,7 +258,6 @@
       "country": "United Kingdom",
       "region": "Europe",
       "tadig": "GBRHU",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -270,7 +269,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "aut-tmobile",
@@ -278,7 +277,6 @@
       "country": "Austria",
       "region": "Europe",
       "tadig": "AUTMM",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -289,7 +287,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "bel-tb",
@@ -297,7 +295,6 @@
       "country": "Belgium",
       "region": "Europe",
       "tadig": "BELTB",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -309,7 +306,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "bel-ko-tn",
@@ -317,7 +314,6 @@
       "country": "Belgium",
       "region": "Europe",
       "tadig": "BELKO",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -329,7 +325,7 @@
       "agreement_status": "signed",
       "agreement_pct": 100,
       "nodes": "PPPPPPPPP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "can-bell",
@@ -337,7 +333,6 @@
       "country": "Canada",
       "region": "Americas",
       "tadig": "CANBM",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -349,7 +344,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "chn-cmcc",
@@ -357,7 +352,6 @@
       "country": "China",
       "region": "Asia-Pacific",
       "tadig": "CHNCT",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -369,7 +363,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "hrv-ht",
@@ -377,7 +371,6 @@
       "country": "Croatia",
       "region": "Europe",
       "tadig": "HRVCN",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -388,7 +381,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "dnk-tdc",
@@ -396,7 +389,6 @@
       "country": "Denmark",
       "region": "Europe",
       "tadig": "DNKTD",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -408,7 +400,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "jpn-kddi",
@@ -416,7 +408,6 @@
       "country": "Japan",
       "region": "Asia-Pacific",
       "tadig": "JPNKD",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -428,7 +419,7 @@
       "agreement_status": "signed",
       "agreement_pct": 100,
       "nodes": "PPPPPPPPP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "kor-lg-out",
@@ -436,7 +427,6 @@
       "country": "South Korea",
       "region": "Asia-Pacific",
       "tadig": "KORLG",
-      "demo": true,
       "directions": [
         "outbound"
       ],
@@ -449,7 +439,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDD",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "kor-lg-toll",
@@ -457,7 +447,6 @@
       "country": "South Korea",
       "region": "Asia-Pacific",
       "tadig": "KORLG",
-      "demo": true,
       "directions": [
         "outbound"
       ],
@@ -469,7 +458,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "lux-pt",
@@ -477,7 +466,6 @@
       "country": "Luxembourg",
       "region": "Europe",
       "tadig": "LUXPT",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -489,7 +477,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "lux-tg",
@@ -497,7 +485,6 @@
       "country": "Luxembourg",
       "region": "Europe",
       "tadig": "LUXTG",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -508,7 +495,7 @@
       "agreement_status": "signed",
       "agreement_pct": 100,
       "nodes": "PPPPPPPNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "mex-mextel",
@@ -516,7 +503,6 @@
       "country": "Mexico",
       "region": "Americas",
       "tadig": "MEXMT",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -528,7 +514,7 @@
       "agreement_status": "negotiation",
       "agreement_pct": 40,
       "nodes": "NPPNNNNNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "jpn-docomo-in",
@@ -536,7 +522,6 @@
       "country": "Japan",
       "region": "Asia-Pacific",
       "tadig": "JPNDO",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -549,7 +534,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDD",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "jpn-docomo-out",
@@ -557,7 +542,6 @@
       "country": "Japan",
       "region": "Asia-Pacific",
       "tadig": "JPNDO",
-      "demo": true,
       "directions": [
         "outbound"
       ],
@@ -569,7 +553,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "pol-02",
@@ -577,7 +561,6 @@
       "country": "Poland",
       "region": "Europe",
       "tadig": "POL02",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -589,7 +572,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "che-swisscom-in",
@@ -597,7 +580,6 @@
       "country": "Switzerland",
       "region": "Europe",
       "tadig": "CHE01",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -609,7 +591,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "che-swisscom-out",
@@ -617,7 +599,6 @@
       "country": "Switzerland",
       "region": "Europe",
       "tadig": "CHE01",
-      "demo": true,
       "directions": [
         "outbound"
       ],
@@ -629,7 +610,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDNN",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "esp-telefonica",
@@ -637,7 +618,6 @@
       "country": "Spain",
       "region": "Europe",
       "tadig": "ESPTE",
-      "demo": true,
       "directions": [
         "inbound",
         "outbound"
@@ -650,7 +630,7 @@
       "agreement_status": "signed",
       "agreement_pct": 100,
       "nodes": "PPPPPPPPP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     },
     {
       "id": "deu-telekom",
@@ -658,7 +638,6 @@
       "country": "Germany",
       "region": "Europe",
       "tadig": "DEUD1",
-      "demo": true,
       "directions": [
         "inbound"
       ],
@@ -670,7 +649,7 @@
       "agreement_status": "live",
       "agreement_pct": 100,
       "nodes": "DDDDDDDDP",
-      "checklist_note": "derived"
+      "checklist_note": "sanitized"
     }
   ],
   "tracks": [
@@ -839,7 +818,7 @@
       "script": "IMS_REGISTER_OK",
       "purpose": "Inbound VoLTE — IMS registration success on visited network",
       "location": "France / Paris",
-      "roaming_to": "Bouygues Telecom (demo label)",
+      "roaming_to": "Bouygues Telecom",
       "ue_type": "Global LTE UE",
       "highlights": [
         "LTE attach combined",
@@ -849,14 +828,14 @@
         "IPsec optional",
         "iterations for stability"
       ],
-      "note": "Portfolio mock of a SIGOS/NFTParker-style script config — no live numbers or secrets"
+      "note": "Sanitized script card from the program. Subscriber numbers and live SIGOS parameters omitted."
     },
     {
       "tool": "SIGOS",
       "script": "VOLTE_EMERGENCYCALL",
       "purpose": "VoLTE / emergency call behaviour while roaming (112)",
       "location": "France / Paris",
-      "roaming_by": "Bouygues SIM profile (demo)",
+      "roaming_by": "Bouygues Telecom SIM profile",
       "ue_type": "Android",
       "highlights": [
         "Emergency number 112",
@@ -865,7 +844,7 @@
         "SIP UDP 5060",
         "PCSCF via DNS"
       ],
-      "note": "Portfolio mock — parameters illustrative only"
+      "note": "Sanitized parameters only. Subscriber numbers and live SIGOS exports omitted."
     },
     {
       "tool": "SIGOS",

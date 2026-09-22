@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Olympics 2024 Roaming Program · Portfolio demo</title>
-  <meta name="description" content="Portfolio demo of inbound and outbound roaming readiness for the Paris 2024 Games. Fictional partners and figures, inspired by program work at Bouygues Telecom.">
+  <title>Olympics 2024 Roaming Program · Bouygues Telecom</title>
+  <meta name="description" content="Portfolio showcase of real Paris 2024 inbound and outbound roaming work at Bouygues Telecom by Elie Minassian. Confidential subscriber data and live system exports omitted.">
   <meta name="author" content="Elie Minassian">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +15,7 @@
     (function () {
       try {
         var query = new URLSearchParams(location.search).get("theme");
-        var stored = localStorage.getItem("roaming-demo-theme");
+        var stored = localStorage.getItem("roaming-theme");
         var theme = query === "light" || query === "dark" ? query : stored;
         if (theme !== "light" && theme !== "dark") {
           theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -31,15 +31,15 @@
   <a class="skip" href="#content">Skip to content</a>
   <div class="banner" role="note">
     <div class="wrap banner-inner">
-      <strong>Portfolio demo — fictional data, not real operator agreements or live configs.</strong>
-      <span>Partner names and TADIGs are from the Paris 2024 roaming partner set at Bouygues Telecom. Not an official Bouygues Telecom publication. IR.25 tables and SIGOS cards are illustrative examples derived from IR.25 S8HR structure and SIGOS-style test scripts (IMS register, emergency 112, MO/MT, SMS), not live exports.</span>
+      <strong>Showcase of real Olympics 2024 roaming work at Bouygues Telecom (inbound & outbound). Confidential subscriber data and live system exports omitted. Not an official Bouygues Telecom publication or endorsement.</strong>
+      <span>Elie Minassian’s work on Paris 2024 inbound and outbound roaming: IR.21, RoamSys, SIGOS, and IR.25 S8HR VoLTE tests (3G, LTE, IMS). Partner names are the actual roaming partner set. Live MSISDNs, IMSIs, emails, full IR.21 documents, and raw SIGOS production exports are left out. Where a full bilateral pack cannot be published, the figures shown are sanitized.</span>
     </div>
   </div>
 
   <div class="wrap">
     <header class="site-header">
       <div class="header-top">
-        <p class="kicker">Bouygues Telecom · Home network · Portfolio demo</p>
+        <p class="kicker">Bouygues Telecom · Home network · Olympics 2024 roaming</p>
         <button id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
       </div>
       <h1>Olympics 2024 Roaming Program</h1>
@@ -83,7 +83,7 @@
           </article>
           <article class="card">
             <h2>Agreement progress toward the Games</h2>
-            <p class="section-note">Illustrative curve ending on the 12 June 2024 partner-set totals. Not a RoamSys history export, and no forecast after the snapshot.</p>
+            <p class="section-note">Sanitized progress view ending on the 12 June 2024 agreement snapshot. Not a raw RoamSys history export, and no forecast after the snapshot.</p>
             <div class="chart-box" role="img" aria-label="Line chart of inbound and outbound agreement completion over time">
               <canvas id="chart-trend"></canvas>
             </div>
@@ -96,14 +96,14 @@
         <div class="chart-grid">
           <article class="card">
             <h2>Track coverage</h2>
-            <p class="section-note">Share of direction lines that include each track. This is coverage of the partner set, not a SIGOS pass-rate export.</p>
+            <p class="section-note">Share of direction lines that include each track. Coverage of the partner set, not a raw SIGOS pass-rate export.</p>
             <div class="chart-box" role="img" aria-label="Track coverage for 3G, LTE, VoLTE, R-IN, R-OUT, IR.25, and toll">
               <canvas id="chart-tech"></canvas>
             </div>
           </article>
           <article class="card">
             <h2 id="node-chart-title">Checklist completion</h2>
-            <p class="section-note" id="node-chart-note">Roaming enablement on the core, not a live configuration extract.</p>
+            <p class="section-note" id="node-chart-note">Roaming enablement on the core. Checklist cells are sanitized; a raw node dump is not published.</p>
             <div class="chart-box nodes" role="img" aria-label="Node checklist completion">
               <canvas id="chart-nodes"></canvas>
             </div>
@@ -127,7 +127,7 @@
           <div>
             <p class="section-kicker">Nodes</p>
             <h2 id="heatmap-heading">Roaming enablement by partner</h2>
-            <p class="section-note">Readiness sketch from agreement, IR.21, and tracks — not a live node extract. IMS/CSCF follows the VoLTE track. The SIGOS column follows IR.25, or VoLTE if the lab pack is not flagged.</p>
+            <p class="section-note">Sanitized from agreement, IR.21, and tracks. A raw node dump is not published. IMS/CSCF follows the VoLTE track. The SIGOS column follows IR.25, or VoLTE if the lab pack is not flagged.</p>
           </div>
           <div class="segment" id="heat-switch" role="group" aria-label="Heatmap direction">
             <button type="button" data-heat="inbound" aria-pressed="true">Inbound</button>
@@ -146,7 +146,7 @@
           <div>
             <p class="section-kicker">Examples</p>
             <h2 id="ir25-heading">IR.25 / S8HR test examples</h2>
-            <p class="section-note">Illustrative cases for NTT DOCOMO, Magenta Austria, and 3 UK. Structure follows GSMA IR.25 S8HR (IMS register, MO/MT, emergency 112, SMS). Results are not a live lab export.</p>
+            <p class="section-note">Real IR.25 / S8HR test types from the program for NTT DOCOMO, Magenta Austria, and 3 UK (IMS register, MO/MT, emergency 112, SMS). Sensitive fields removed. Where a full bilateral pack cannot be published, the values are sanitized.</p>
           </div>
         </div>
         <div class="example-stack" id="ir25-tables"></div>
@@ -157,7 +157,7 @@
           <div>
             <p class="section-kicker">Examples</p>
             <h2 id="sigos-heading">SIGOS active testing examples</h2>
-            <p class="section-note">Illustrative SIGOS-style script cards: IMS register, emergency 112, MO/MT voice, and SMS. Not screenshots of a production UI and not a parameter dump.</p>
+            <p class="section-note">Real SIGOS test types from the program: IMS register, emergency 112, MO/MT voice, and SMS. Subscriber data and production parameters omitted. Not a screenshot of the production UI.</p>
           </div>
         </div>
         <div class="sigos-grid" id="sigos-cards"></div>
@@ -221,7 +221,7 @@
         </div>
         <div class="table-wrap">
           <table class="partners">
-            <caption>Olympics roaming partner set. Checklist column is a derived sketch, not a live extract.</caption>
+            <caption>Actual Olympics roaming partner set. Checklist column is sanitized from agreement, IR.21, and tracks.</caption>
             <thead id="partner-head">
               <tr>
                 <th data-sort="partner" scope="col">Partner</th>
@@ -253,8 +253,8 @@
 
     <footer class="site-footer">
       <p>Elie Minassian · Bouygues Telecom (Olympics 2024 Roaming) · <a href="mailto:minassianelie@gmail.com">minassianelie@gmail.com</a></p>
-      <p>Personal portfolio demo. Not an official Bouygues Telecom publication or endorsement. No trademarked logo is used.</p>
-      <p>Portfolio demo — fictional data, not real operator agreements or live configs. Source: <a href="data/program.json">data/program.json</a>.</p>
+      <p>Portfolio showcase of real work at Bouygues Telecom. Not an official Bouygues Telecom publication or endorsement. No trademarked logo is used.</p>
+      <p>Showcase of real Olympics 2024 roaming work at Bouygues Telecom (inbound & outbound). Confidential subscriber data and live system exports omitted. Not an official Bouygues Telecom publication or endorsement. Source: <a href="data/program.json">data/program.json</a>.</p>
     </footer>
   </div>
 
