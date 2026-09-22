@@ -2,6 +2,12 @@
 
 Portfolio demo — fictional data, not real operator agreements or live configs.
 
+## Live dashboard
+
+**https://e-mination.github.io/paris-olympics-2024-roaming-volte/**
+
+Open that link for the graphs and stats: agreement completion, IR.21, the node heatmap, and 3G / LTE / VoLTE / IMS. Nothing to install. The screenshots below are the same board.
+
 A static readiness board for **inbound and outbound roaming** ahead of the Paris 2024 Olympic and Paralympic Games. The home network in this story is **Bouygues Telecom**. Every partner, PLMN, IR.21 state, test result, and node status is synthetic.
 
 This is a personal portfolio piece by Elie Minassian. It is **not an official Bouygues Telecom publication or endorsement**, and it does not use a Bouygues logo.
@@ -77,40 +83,17 @@ There are no real IP addresses, no live PLMNs, and no IR.21 document bodies. The
 
 **SIGOS** (the SITE test system, and the hosted GlobalRoamer service, now part of Mobileum) is an active-testing platform. Probes run end-to-end roaming tests — voice, data, VoLTE, IMS — inbound and outbound. Pass rates on this page stand in for that test desk. Product reference: [GlobalRoamer](https://www.mobileum.com/ecosystems/globalroamer).
 
-## Run it locally
+## Local development
 
-The page loads `data/program.json` with `fetch`. Opening the file directly (`file://`) will not show the figures. Use a local server:
+The published board is the live dashboard above. To run a copy on your machine, serve the repo root (opening `index.html` as a file will not load the JSON):
 
 ```bash
-git clone https://github.com/e-mination/paris-olympics-2024-roaming-volte.git
-cd paris-olympics-2024-roaming-volte
 python3 -m http.server 8080
 ```
 
-Then open [http://localhost:8080](http://localhost:8080).
+Then open http://localhost:8080. Optional check of the snapshot figures: `python3 scripts/summarize.py --check`.
 
-Charts use Chart.js from a CDN, and the UI uses IBM Plex and Source Serif from Google Fonts. The register, heatmap, and KPIs still render from the JSON if those requests are blocked. A light/dark control sits in the header. `#inbound` and `#outbound` focus one direction.
-
-Recompute the headline figures from the JSON:
-
-```bash
-python3 scripts/summarize.py --check
-python3 scripts/summarize.py --write   # optional data/summary.json (gitignored)
-```
-
-`--check` exits non-zero if the June 2024 point on the trend chart does not match the agreement count, or if a PLMN is not an MCC `001` example.
-
-## GitHub Pages
-
-1. Push the branch you want to publish (after merge, that is `main`).
-2. On GitHub: **Settings → Pages → Build and deployment**.
-3. Source: **Deploy from a branch**.
-4. Branch: `main`, folder: **`/ (root)`**.
-5. Save.
-
-The site is served from the repository root (`index.html`, `css/`, `js/`, `data/`). Expected URL:
-
-`https://e-mination.github.io/paris-olympics-2024-roaming-volte/`
+GitHub Pages already deploys `main` from the repository root (`index.html`, `css/`, `js/`, `data/`). Charts load Chart.js from the CDN; the figures load from the relative path `data/program.json`.
 
 ## Data
 
